@@ -91,10 +91,10 @@ public class Pistol : MonoBehaviour
 
         shotsFired++;
 
-        Vector3 tDirection = playerCam.transform.forward;
+        Vector3 direction = playerCam.transform.forward;
         RaycastHit hit;
 
-        if (Physics.Raycast(playerCam.transform.position, tDirection, out hit))
+        if (Physics.Raycast(playerCam.transform.position, direction, out hit))
         {
             hitObject = hit.transform.gameObject;
 

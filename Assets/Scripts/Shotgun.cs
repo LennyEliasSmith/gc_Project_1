@@ -11,6 +11,7 @@ public class Shotgun : MonoBehaviour
     public float maxAmmo;
     public float ammo;
     public float reloadTime;
+    public int shotgunShots;
 
     public float killCount;
     public float shotsFired;
@@ -34,7 +35,7 @@ public class Shotgun : MonoBehaviour
     // Start is called before the first frame update 
     void Start()
     {
-        playerCam = GetComponent<Camera>();
+        playerCam = GetComponentInParent<Camera>();
 
         AudioSource[] sources = GetComponentsInChildren<AudioSource>();
 
@@ -59,12 +60,24 @@ public class Shotgun : MonoBehaviour
 
             if (Input.GetButtonDown("Fire1"))
             {
-
-                nextTimeToFire = Time.time + 1f / fireRate;
-
-                Shoot();
-
+                Debug.Log("shotgun should be shooting");
+                // nextTimeToFire = Time.time + 1f / fireRate;
+                isShooting = true;
             }
+        }
+
+        if (isShooting)
+        {
+            gunAudio.PlayOneShot(gunShoot);
+
+            for (int i = 0; i < shotgunShots; i++)
+            {
+                Debug.Log("shotgun should be shooting");
+                ShotgunShot();
+            }
+
+            ammo--;
+            isShooting = false;
         }
 
         if (Input.GetButtonDown("Reload") && !isReloading && ammo != maxAmmo)
@@ -78,24 +91,29 @@ public class Shotgun : MonoBehaviour
 
     }
 
-    void Shoot()
+    void ShotgunShot()
     {
 
-        isShooting = true;
+        Debug.Log("KaPOW");
 
-        Debug.Log("PewPew");
-
-        gunAudio.PlayOneShot(gunShoot);
+        // gunAudio.PlayOneShot(gunShoot);
         // animator.SetTrigger("Shoot");
-        muzzle.Play();
+        // muzzle.Play();
 
-        shotsFired++;
+        Vector3 direction = playerCam.transform.forward;
+        Vector3 spread = new Vector3();
 
-        Vector3 tDirection = playerCam.transform.forward;
+        spread += playerCam.transform.up * Random.Range(-1f, 1f);
+        spread += playerCam.transform.right * Random.Range(-1f, 1f);
+        direction += spread.normalized * Random.Range(0f, 0.1f);
+
         RaycastHit hit;
 
-        if (Physics.Raycast(playerCam.transform.position, tDirection, out hit))
+        if (Physics.Raycast(playerCam.transform.position, direction, out hit))
         {
+
+            Debug.DrawLine(playerCam.transform.position, hit.point, Color.green, 2);
+
             hitObject = hit.transform.gameObject;
 
             Debug.Log(hitObject);
@@ -107,10 +125,10 @@ public class Shotgun : MonoBehaviour
                 targetHP.TakeDamage();
             }
         }
-
-        ammo--;
-
-        isShooting = false;
+        else
+        {
+            Debug.DrawRay(playerCam.transform.position, direction, Color.red, 2);
+        }
 
         // animator.SetTrigger("Shoot");
 
