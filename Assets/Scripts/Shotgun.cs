@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Pistol : MonoBehaviour
+public class Shotgun : MonoBehaviour
 {
 
     public float fireRate;
@@ -15,7 +15,7 @@ public class Pistol : MonoBehaviour
     public float killCount;
     public float shotsFired;
     public float accuracy;
-    
+
     public bool isReloading;
     public bool isShooting;
 
@@ -28,13 +28,13 @@ public class Pistol : MonoBehaviour
 
     public ParticleSystem muzzle;
 
-    public Animator animator;
+    // public Animator animator;
 
 
     // Start is called before the first frame update 
     void Start()
     {
-        playerCam = GetComponentInParent<Camera>();
+        playerCam = GetComponent<Camera>();
 
         AudioSource[] sources = GetComponentsInChildren<AudioSource>();
 
@@ -86,7 +86,7 @@ public class Pistol : MonoBehaviour
         Debug.Log("PewPew");
 
         gunAudio.PlayOneShot(gunShoot);
-        animator.SetTrigger("Shoot");
+        // animator.SetTrigger("Shoot");
         muzzle.Play();
 
         shotsFired++;
@@ -112,7 +112,7 @@ public class Pistol : MonoBehaviour
 
         isShooting = false;
 
-        animator.SetTrigger("Shoot");
+        // animator.SetTrigger("Shoot");
 
         accuracy = killCount / shotsFired;
     }
@@ -122,7 +122,7 @@ public class Pistol : MonoBehaviour
 
         Debug.Log("Reloading...");
 
-        animator.SetTrigger("Reload");
+        // animator.SetTrigger("Reload");
 
         gunAudio.PlayOneShot(gunReload);
 
