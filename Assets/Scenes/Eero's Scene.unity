@@ -499,9 +499,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireRate: 1
   nextTimeToFire: 0
-  maxAmmo: 6
-  ammo: 0
-  reloadTime: 2
+  reloadTime: 0.3
   shotgunShots: 8
   killCount: 0
   shotsFired: 0
@@ -511,7 +509,22 @@ MonoBehaviour:
   gunAudio: {fileID: 0}
   gunShoot: {fileID: 0}
   gunReload: {fileID: 0}
+  ammo: {fileID: 0}
   muzzle: {fileID: 970259074}
+--- !u!114 &421781360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421781357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c5a112a856a8d746a938154107170a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAmmo: 6
+  currentAmmo: 0
 --- !u!1001 &427616939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -619,6 +632,26 @@ MonoBehaviour:
   deathSound: {fileID: 0}
   audioSources: []
   sprite: {fileID: 0}
+--- !u!1 &532258167 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 184995251458738652, guid: c2d0fc30819783e4fa6ec80a02c43d8d,
+    type: 3}
+  m_PrefabInstance: {fileID: 250153318}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &532258174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532258167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c5a112a856a8d746a938154107170a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAmmo: 15
+  currentAmmo: 0
 --- !u!1 &534722508 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2859776680659177099, guid: f41af16d91e5c16439c7cd30e8e2fdb6,

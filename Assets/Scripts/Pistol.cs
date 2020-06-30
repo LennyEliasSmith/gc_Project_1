@@ -8,8 +8,6 @@ public class Pistol : MonoBehaviour
 
     public float fireRate;
     public float nextTimeToFire;
-    public float maxAmmo;
-    public float ammo;
     public float reloadTime;
 
     public float killCount;
@@ -27,6 +25,7 @@ public class Pistol : MonoBehaviour
     public AudioClip gunReload;
 
     public ParticleSystem muzzle;
+    public WeaponAmmo ammo;
 
     public Animator animator;
 
@@ -35,6 +34,7 @@ public class Pistol : MonoBehaviour
     void Start()
     {
         playerCam = GetComponentInParent<Camera>();
+        ammo = GetComponent<WeaponAmmo>();
 
         AudioSource[] sources = GetComponentsInChildren<AudioSource>();
 
@@ -46,15 +46,13 @@ public class Pistol : MonoBehaviour
 
         isReloading = false;
 
-        ammo = maxAmmo;
-
     }
 
     // Update is called once per frame 
     void Update()
     {
 
-        if (ammo > 0 && !isReloading && !isShooting && Time.time >= nextTimeToFire)
+        if (ammo.currentAmmo > 0 && !isReloading && !isShooting && Time.time >= nextTimeToFire)
         {
 
             if (Input.GetButtonDown("Fire1"))
@@ -67,7 +65,7 @@ public class Pistol : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Reload") && !isReloading && ammo != maxAmmo)
+        if (Input.GetButtonDown("Reload") && !isReloading && ammo.currentAmmo != ammo.maxAmmo)
         {
 
             StartCoroutine(Reload());
@@ -100,6 +98,8 @@ public class Pistol : MonoBehaviour
 
             Debug.Log(hitObject);
 
+            Debug.DrawLine(playerCam.transform.position, hit.point, Color.green, 2);
+
             if (hitObject.CompareTag("Enemy"))
             {
                 killCount++;
@@ -108,7 +108,7 @@ public class Pistol : MonoBehaviour
             }
         }
 
-        ammo--;
+        ammo.currentAmmo--;
 
         isShooting = false;
 
@@ -130,7 +130,7 @@ public class Pistol : MonoBehaviour
 
         yield return new WaitForSeconds(reloadTime);
 
-        ammo = maxAmmo;
+        ammo.Reload();
 
         Debug.Log("Finished reload");
 

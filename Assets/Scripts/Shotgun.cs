@@ -8,8 +8,7 @@ public class Shotgun : MonoBehaviour
 
     public float fireRate;
     public float nextTimeToFire;
-    public float maxAmmo;
-    public float ammo;
+
     public float reloadTime;
     public int shotgunShots;
 
@@ -26,6 +25,9 @@ public class Shotgun : MonoBehaviour
     public AudioSource gunAudio;
     public AudioClip gunShoot;
     public AudioClip gunReload;
+    public AudioClip gunShell;
+
+    public WeaponAmmo ammo;
 
     public ParticleSystem muzzle;
 
@@ -36,18 +38,19 @@ public class Shotgun : MonoBehaviour
     void Start()
     {
         playerCam = GetComponentInParent<Camera>();
+        ammo = GetComponent<WeaponAmmo>();
+
 
         AudioSource[] sources = GetComponentsInChildren<AudioSource>();
 
         gunAudio = sources[0];
         gunShoot = sources[0].clip;
         gunReload = sources[1].clip;
+        gunShell = sources[2].clip;
 
         muzzle = GetComponentInChildren<ParticleSystem>();
 
         isReloading = false;
-
-        ammo = maxAmmo;
 
     }
 
@@ -55,13 +58,12 @@ public class Shotgun : MonoBehaviour
     void Update()
     {
 
-        if (ammo > 0 && !isReloading && !isShooting && Time.time >= nextTimeToFire)
+        if (ammo.currentAmmo > 0 && !isReloading && !isShooting && Time.time >= nextTimeToFire)
         {
 
             if (Input.GetButtonDown("Fire1"))
             {
-                Debug.Log("shotgun should be shooting");
-                // nextTimeToFire = Time.time + 1f / fireRate;
+                nextTimeToFire = Time.time + 1f / fireRate;
                 isShooting = true;
             }
         }
@@ -71,24 +73,22 @@ public class Shotgun : MonoBehaviour
             gunAudio.PlayOneShot(gunShoot);
 
             for (int i = 0; i < shotgunShots; i++)
-            {
-                Debug.Log("shotgun should be shooting");
+            {       
                 ShotgunShot();
             }
 
-            ammo--;
+            ammo.currentAmmo--;
+            
             isShooting = false;
         }
 
-        if (Input.GetButtonDown("Reload") && !isReloading && ammo != maxAmmo)
+        if (Input.GetButtonDown("Reload") && !isReloading && ammo.currentAmmo != ammo.maxAmmo)
         {
 
-            StartCoroutine(Reload());
+            isReloading = true;
+            Reload();
 
         }
-
-
-
     }
 
     void ShotgunShot()
@@ -113,9 +113,7 @@ public class Shotgun : MonoBehaviour
         {
 
             Debug.DrawLine(playerCam.transform.position, hit.point, Color.green, 2);
-
             hitObject = hit.transform.gameObject;
-
             Debug.Log(hitObject);
 
             if (hitObject.CompareTag("Enemy"))
@@ -135,23 +133,33 @@ public class Shotgun : MonoBehaviour
         accuracy = killCount / shotsFired;
     }
 
-    IEnumerator Reload()
+    void Reload()
+    {
+        StartCoroutine(ShotgunReload());
+    }
+
+    IEnumerator ShotgunReload()
     {
 
         Debug.Log("Reloading...");
 
         // animator.SetTrigger("Reload");
 
-        gunAudio.PlayOneShot(gunReload);
+        ammo.currentAmmo++;
 
-        isReloading = true;
+        gunAudio.PlayOneShot(gunShell);
 
         yield return new WaitForSeconds(reloadTime);
 
-        ammo = maxAmmo;
+        Debug.Log("Loaded shell");
 
-        Debug.Log("Finished reload");
+        if (ammo.currentAmmo == ammo.maxAmmo)
+        {
+            isReloading = false;
+        } else {
+            Reload();
+        }
+           
 
-        isReloading = false;
     }
 }

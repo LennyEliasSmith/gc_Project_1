@@ -8,22 +8,25 @@ public class PlayerHUD : MonoBehaviour
 
     public Text ammoCount;
     public Text killCount;
-    public Pistol player;
+    public WeaponAmmo ammo;
+
     public string ammoString;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponentInChildren<Pistol>();
+        ammo = GetComponentInChildren<WeaponAmmo>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        ammo = GetComponentInChildren<WeaponAmmo>();
+
         // ammoString = player.ammo.ToString() + " / " + player.maxAmmo.ToString();
-        ammoCount.text = player.ammo.ToString() + " / " + player.maxAmmo.ToString();
+        ammoCount.text = ammo.currentAmmo.ToString() + " / " + ammo.maxAmmo.ToString();
         // ammoCount.text = ammoString;
 
-        killCount.text = player.killCount.ToString();
+        // killCount.text = ammo.killCount.ToString();
     }
 }
