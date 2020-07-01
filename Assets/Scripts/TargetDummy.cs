@@ -5,19 +5,12 @@ using UnityEngine;
 public class TargetDummy : MonoBehaviour
 {
 
-    public float health = 1;
-    public float deathTime = 0.5f;
-
-    public AudioSource deathSound;
-
-    public AudioClip[] audioSources;
-
-    public SpriteRenderer sprite;
+    public Health hp;
 
     // Start is called before the first frame update
     void Start()
     {
-        deathSound = GetComponentInChildren<AudioSource>();
+        hp = GetComponent<Health>();
     }
 
     // Update is called once per frame
@@ -26,32 +19,4 @@ public class TargetDummy : MonoBehaviour
         
     }
 
-    public void TakeDamage()
-    {
-        health--;
-
-        if(health <= 0)
-        {
-            RandomSound();
-
-            sprite.enabled = false;
-
-            StartCoroutine(Die());
-        }
-    }
-
-    IEnumerator Die()
-    {
-        Debug.Log("death");
-
-        yield return new WaitForSeconds(deathTime);
-
-        Destroy(this.gameObject);
-    }
-
-    void RandomSound()
-    {
-        deathSound.clip = audioSources[Random.Range(0, audioSources.Length)];
-        deathSound.Play();
-    }
 }

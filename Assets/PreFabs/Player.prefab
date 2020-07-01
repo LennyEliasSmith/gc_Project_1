@@ -268,6 +268,8 @@ GameObject:
   - component: {fileID: 7845911066259486606}
   - component: {fileID: 46752729562989119}
   - component: {fileID: 5409292894907366832}
+  - component: {fileID: 1859788358067129782}
+  - component: {fileID: 7239290408525126314}
   m_Layer: 5
   m_Name: Pistol
   m_TagString: Untagged
@@ -380,12 +382,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fde271d42a4c1845822b616047f2a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 5
   fireRate: 5
   nextTimeToFire: 0
   reloadTime: 1.5
-  killCount: 0
-  shotsFired: 0
-  accuracy: 0
   isReloading: 0
   isShooting: 0
   gunAudio: {fileID: 0}
@@ -393,7 +393,38 @@ MonoBehaviour:
   gunReload: {fileID: 0}
   muzzle: {fileID: 6058468544420406338}
   ammo: {fileID: 0}
+  stats: {fileID: 0}
   animator: {fileID: 46752729562989119}
+--- !u!114 &1859788358067129782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184995251458738652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c5a112a856a8d746a938154107170a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAmmo: 15
+  currentAmmo: 0
+--- !u!114 &7239290408525126314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184995251458738652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 600180941d9c54240be49d3bf41afe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killCount: 0
+  shotsFired: 0
+  shotsHit: 0
+  accuracy: 0
 --- !u!1 &542349023106993396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,6 +1040,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8260127881857268946}
+  - component: {fileID: 4332610186855430857}
+  - component: {fileID: 421781359}
+  - component: {fileID: 421781361}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -1034,6 +1068,62 @@ Transform:
   m_Father: {fileID: 6964017110872963714}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4332610186855430857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547016080132595106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c5a112a856a8d746a938154107170a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAmmo: 6
+  currentAmmo: 0
+--- !u!114 &421781359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547016080132595106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b043383f8c0c249ae1e6b150aaf311, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 4
+  fireRate: 2
+  nextTimeToFire: 0
+  reloadTime: 0.4
+  shotgunShots: 8
+  isReloading: 0
+  isShooting: 0
+  gunAudio: {fileID: 0}
+  gunShoot: {fileID: 0}
+  gunReload: {fileID: 0}
+  gunShell: {fileID: 0}
+  ammo: {fileID: 0}
+  stats: {fileID: 0}
+  muzzle: {fileID: 2762776356487755394}
+--- !u!114 &421781361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5547016080132595106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 600180941d9c54240be49d3bf41afe81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killCount: 0
+  shotsFired: 0
+  shotsHit: 0
+  accuracy: 0
 --- !u!1 &5840542783817530556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1640,6 +1730,9 @@ MonoBehaviour:
   ammoCount: {fileID: 252679674115533337}
   killCount: {fileID: 8055329450927020792}
   ammo: {fileID: 0}
+  stats1: {fileID: 7239290408525126314}
+  stats2: {fileID: 421781361}
+  kills: 0
   ammoString: 
 --- !u!1001 &2180082854043758189
 PrefabInstance:
@@ -1738,6 +1831,12 @@ PrefabInstance:
 --- !u!4 &8707020935437414729 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7391735914018397988, guid: 070cc9d31b290b844a01fc3d29c7e5e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2180082854043758189}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2762776356487755394 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4041540566616266991, guid: 070cc9d31b290b844a01fc3d29c7e5e2,
     type: 3}
   m_PrefabInstance: {fileID: 2180082854043758189}
   m_PrefabAsset: {fileID: 0}

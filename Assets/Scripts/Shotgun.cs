@@ -5,16 +5,11 @@ using UnityEngine;
 
 public class Shotgun : MonoBehaviour
 {
-
+    public float damage;
     public float fireRate;
     public float nextTimeToFire;
-
     public float reloadTime;
     public int shotgunShots;
-
-    public float killCount;
-    public float shotsFired;
-    public float accuracy;
 
     public bool isReloading;
     public bool isShooting;
@@ -28,7 +23,7 @@ public class Shotgun : MonoBehaviour
     public AudioClip gunShell;
 
     public WeaponAmmo ammo;
-
+    public WeaponStats stats;
     public ParticleSystem muzzle;
 
     // public Animator animator;
@@ -39,6 +34,7 @@ public class Shotgun : MonoBehaviour
     {
         playerCam = GetComponentInParent<Camera>();
         ammo = GetComponent<WeaponAmmo>();
+        stats = GetComponent<WeaponStats>();
 
 
         AudioSource[] sources = GetComponentsInChildren<AudioSource>();
@@ -77,17 +73,15 @@ public class Shotgun : MonoBehaviour
                 ShotgunShot();
             }
 
+            stats.shotsFired++;
             ammo.currentAmmo--;
-            
             isShooting = false;
         }
 
         if (Input.GetButtonDown("Reload") && !isReloading && ammo.currentAmmo != ammo.maxAmmo)
         {
-
             isReloading = true;
             Reload();
-
         }
     }
 
@@ -111,16 +105,19 @@ public class Shotgun : MonoBehaviour
 
         if (Physics.Raycast(playerCam.transform.position, direction, out hit))
         {
-
+            
             Debug.DrawLine(playerCam.transform.position, hit.point, Color.green, 2);
             hitObject = hit.transform.gameObject;
             Debug.Log(hitObject);
 
             if (hitObject.CompareTag("Enemy"))
             {
-                killCount++;
-                TargetDummy targetHP = hitObject.GetComponent<TargetDummy>();
-                targetHP.TakeDamage();
+                stats.shotsHit++;
+                Health targetHP = hitObject.GetComponent<Health>();
+                targetHP.TakeDamage(damage);
+                // if (targetHP.currentHP <= 0)
+                    // stats.killCount++;
+                    
             }
         }
         else
@@ -130,7 +127,6 @@ public class Shotgun : MonoBehaviour
 
         // animator.SetTrigger("Shoot");
 
-        accuracy = killCount / shotsFired;
     }
 
     void Reload()

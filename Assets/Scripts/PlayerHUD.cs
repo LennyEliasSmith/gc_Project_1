@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class PlayerHUD : MonoBehaviour
 {
-
     public Text ammoCount;
     public Text killCount;
+
     public WeaponAmmo ammo;
+    public WeaponStats stats1;
+    public WeaponStats stats2;
+    public float kills;
 
     public string ammoString;
 
@@ -16,6 +19,7 @@ public class PlayerHUD : MonoBehaviour
     void Start()
     {
         ammo = GetComponentInChildren<WeaponAmmo>();
+
     }
 
     // Update is called once per frame
@@ -27,6 +31,8 @@ public class PlayerHUD : MonoBehaviour
         ammoCount.text = ammo.currentAmmo.ToString() + " / " + ammo.maxAmmo.ToString();
         // ammoCount.text = ammoString;
 
-        // killCount.text = ammo.killCount.ToString();
+        kills = stats1.killCount + stats2.killCount;
+
+        killCount.text = kills.ToString();
     }
 }

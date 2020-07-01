@@ -5,14 +5,10 @@ using UnityEngine;
 
 public class Pistol : MonoBehaviour
 {
-
+    public float damage;
     public float fireRate;
     public float nextTimeToFire;
     public float reloadTime;
-
-    public float killCount;
-    public float shotsFired;
-    public float accuracy;
     
     public bool isReloading;
     public bool isShooting;
@@ -26,6 +22,7 @@ public class Pistol : MonoBehaviour
 
     public ParticleSystem muzzle;
     public WeaponAmmo ammo;
+    public WeaponStats stats;
 
     public Animator animator;
 
@@ -35,6 +32,7 @@ public class Pistol : MonoBehaviour
     {
         playerCam = GetComponentInParent<Camera>();
         ammo = GetComponent<WeaponAmmo>();
+        stats = GetComponent<WeaponStats>();
 
         AudioSource[] sources = GetComponentsInChildren<AudioSource>();
 
@@ -59,7 +57,6 @@ public class Pistol : MonoBehaviour
             {
 
                 nextTimeToFire = Time.time + 1f / fireRate;
-
                 Shoot();
 
             }
@@ -67,9 +64,7 @@ public class Pistol : MonoBehaviour
 
         if (Input.GetButtonDown("Reload") && !isReloading && ammo.currentAmmo != ammo.maxAmmo)
         {
-
             StartCoroutine(Reload());
-
         }
 
 
@@ -87,7 +82,7 @@ public class Pistol : MonoBehaviour
         animator.SetTrigger("Shoot");
         muzzle.Play();
 
-        shotsFired++;
+        stats.shotsFired++;
 
         Vector3 direction = playerCam.transform.forward;
         RaycastHit hit;
@@ -97,14 +92,15 @@ public class Pistol : MonoBehaviour
             hitObject = hit.transform.gameObject;
 
             Debug.Log(hitObject);
-
             Debug.DrawLine(playerCam.transform.position, hit.point, Color.green, 2);
 
             if (hitObject.CompareTag("Enemy"))
             {
-                killCount++;
-                TargetDummy targetHP = hitObject.GetComponent<TargetDummy>();
-                targetHP.TakeDamage();
+                stats.shotsHit++;
+                Health targetHP = hitObject.GetComponent<Health>();
+                targetHP.TakeDamage(damage);
+                if (targetHP.currentHP <= 0)
+                    stats.killCount++;
             }
         }
 
@@ -114,7 +110,6 @@ public class Pistol : MonoBehaviour
 
         animator.SetTrigger("Shoot");
 
-        accuracy = killCount / shotsFired;
     }
 
     IEnumerator Reload()
