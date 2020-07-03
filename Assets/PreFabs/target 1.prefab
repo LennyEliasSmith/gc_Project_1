@@ -169,13 +169,13 @@ MonoBehaviour:
   currentHP: 0
   maxHP: 10
   deathTime: 0.5
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 365461502549153317}
   audioSources:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  sprite: {fileID: 0}
+  - {fileID: 8300000, guid: 01f35b33f721d6447bab4bfd1618349b, type: 3}
+  - {fileID: 8300000, guid: 9bd081c9619502249b8aa13f583ea5f3, type: 3}
+  - {fileID: 8300000, guid: aade4c324e6fba543ae9476704257039, type: 3}
+  - {fileID: 8300000, guid: 18dd0c15ebbd46e4da79472135c6dbb4, type: 3}
+  sprite: {fileID: 7623159504374525050}
 --- !u!114 &4497375751980622544
 MonoBehaviour:
   m_ObjectHideFlags: 0

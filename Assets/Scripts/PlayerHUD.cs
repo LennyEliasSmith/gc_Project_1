@@ -9,8 +9,9 @@ public class PlayerHUD : MonoBehaviour
     public Text killCount;
 
     public WeaponAmmo ammo;
-    public WeaponStats stats1;
-    public WeaponStats stats2;
+    public WeaponStats statsPSTL;
+    public WeaponStats statsSHTG;
+    public WeaponStats statsAR;
     public float kills;
 
     public string ammoString;
@@ -31,7 +32,7 @@ public class PlayerHUD : MonoBehaviour
         ammoCount.text = ammo.currentAmmo.ToString() + " / " + ammo.maxAmmo.ToString();
         // ammoCount.text = ammoString;
 
-        kills = stats1.killCount + stats2.killCount;
+        kills = statsPSTL.killCount + statsSHTG.killCount + statsAR.killCount;
 
         killCount.text = kills.ToString();
     }

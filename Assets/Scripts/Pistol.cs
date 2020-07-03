@@ -52,13 +52,10 @@ public class Pistol : MonoBehaviour
 
         if (ammo.currentAmmo > 0 && !isReloading && !isShooting && Time.time >= nextTimeToFire)
         {
-
             if (Input.GetButtonDown("Fire1"))
             {
-
                 nextTimeToFire = Time.time + 1f / fireRate;
                 Shoot();
-
             }
         }
 
@@ -66,9 +63,6 @@ public class Pistol : MonoBehaviour
         {
             StartCoroutine(Reload());
         }
-
-
-
     }
 
     void Shoot()
@@ -76,7 +70,7 @@ public class Pistol : MonoBehaviour
 
         isShooting = true;
 
-        Debug.Log("PewPew");
+        // Debug.Log("PewPew");
 
         gunAudio.PlayOneShot(gunShoot);
         animator.SetTrigger("Shoot");
@@ -91,7 +85,7 @@ public class Pistol : MonoBehaviour
         {
             hitObject = hit.transform.gameObject;
 
-            Debug.Log(hitObject);
+            // Debug.Log(hitObject);
             Debug.DrawLine(playerCam.transform.position, hit.point, Color.green, 2);
 
             if (hitObject.CompareTag("Enemy"))
@@ -105,9 +99,7 @@ public class Pistol : MonoBehaviour
         }
 
         ammo.currentAmmo--;
-
         isShooting = false;
-
         animator.SetTrigger("Shoot");
 
     }
@@ -115,20 +107,15 @@ public class Pistol : MonoBehaviour
     IEnumerator Reload()
     {
 
-        Debug.Log("Reloading...");
-
+        // Debug.Log("Reloading...");
         animator.SetTrigger("Reload");
-
         gunAudio.PlayOneShot(gunReload);
-
         isReloading = true;
 
         yield return new WaitForSeconds(reloadTime);
 
         ammo.Reload();
-
-        Debug.Log("Finished reload");
-
+        // Debug.Log("Finished reload");
         isReloading = false;
     }
 }

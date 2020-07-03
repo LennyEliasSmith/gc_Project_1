@@ -8,27 +8,40 @@ public class WeaponSwitch : MonoBehaviour
     private float prevInput = 0, newInput;
     private string mwheelString = "Mouse ScrollWheel";
 
+    public Pistol pistol;
+    public Shotgun shotgun;
+    public AssaultRifle rifle;
+
+    public bool isReloading;
+
     // Start is called before the first frame update
     void Start()
     {
+        pistol = GetComponentInChildren<Pistol>();
+        shotgun = GetComponentInChildren<Shotgun>();
+        rifle = GetComponentInChildren<AssaultRifle>();
+
+        ReloadStatus();
         SelectWeapon();
     }
 
     // Update is called once per frame
     void Update()
     {
+        ReloadStatus();
+
         newInput = Input.GetAxisRaw(mwheelString);
 
         if(prevInput == 0)
         {
-            if (Input.GetAxisRaw(mwheelString) > 0f)
+            if (Input.GetAxisRaw(mwheelString) > 0f && !isReloading)
             {
                 if (selectedWeapon >= transform.childCount - 1)
                     selectedWeapon = 0;
                 else
                     selectedWeapon++;
             }
-            if(Input.GetAxisRaw(mwheelString) < 0f)
+            if(Input.GetAxisRaw(mwheelString) < 0f && !isReloading)
             {
                 if (selectedWeapon <= 0)
                     selectedWeapon = transform.childCount - 1;
@@ -53,5 +66,13 @@ public class WeaponSwitch : MonoBehaviour
                 weapon.gameObject.SetActive(false);
             i++;
         }
+    }
+
+    void ReloadStatus()
+    {
+        if (pistol.isReloading || shotgun.isReloading || rifle.isReloading)
+            isReloading = true;
+        else
+            isReloading = false;
     }
 }

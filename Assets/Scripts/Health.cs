@@ -16,6 +16,7 @@ public class Health : MonoBehaviour
     void Start()
     {
         currentHP = maxHP;
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
