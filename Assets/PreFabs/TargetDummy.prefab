@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4042520692836375533}
   - component: {fileID: 5332477914798640854}
   - component: {fileID: 6559440827276090067}
-  - component: {fileID: 2203367877778293907}
+  - component: {fileID: 2476191694348220738}
   m_Layer: 0
   m_Name: TargetDummy
   m_TagString: Enemy
@@ -95,7 +95,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2203367877778293907
+--- !u!114 &2476191694348220738
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,7 +104,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6705835082522541638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48f53d8177f268446b3481ae45a43dea, type: 3}
+  m_Script: {fileID: 11500000, guid: 96b83da019d743847b89479c1fa1a4ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  currentHP: 0
+  maxHP: 3
+  deathTime: 0
+  deathSound: {fileID: 0}
+  audioSources: []
+  sprite: {fileID: 0}
