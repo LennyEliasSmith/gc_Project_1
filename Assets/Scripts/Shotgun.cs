@@ -16,6 +16,7 @@ public class Shotgun : MonoBehaviour
 
     private Camera playerCam;
     private GameObject hitObject;
+    private PlayerHUD hud;
 
     public AudioSource gunAudio;
     public AudioClip gunShoot;
@@ -26,7 +27,10 @@ public class Shotgun : MonoBehaviour
     public WeaponStats stats;
     public ParticleSystem muzzle;
 
-    // public Animator animator;
+    public Animator animator;
+
+    public float hitTimer;
+    public float hTimer;
 
 
     // Start is called before the first frame update 
@@ -35,7 +39,7 @@ public class Shotgun : MonoBehaviour
         playerCam = GetComponentInParent<Camera>();
         ammo = GetComponent<WeaponAmmo>();
         stats = GetComponent<WeaponStats>();
-
+        hud = GetComponentInParent<PlayerHUD>();
 
         AudioSource[] sources = GetComponentsInChildren<AudioSource>();
 
@@ -67,6 +71,8 @@ public class Shotgun : MonoBehaviour
         if (isShooting)
         {
             gunAudio.PlayOneShot(gunShoot);
+            animator.SetTrigger("Shoot");
+            muzzle.Play();
 
             for (int i = 0; i < shotgunShots; i++)
             {       
@@ -83,17 +89,12 @@ public class Shotgun : MonoBehaviour
             isReloading = true;
             Reload();
         }
+
+        Hitmarker();
     }
 
     void ShotgunShot()
     {
-
-        Debug.Log("KaPOW");
-
-        // gunAudio.PlayOneShot(gunShoot);
-        // animator.SetTrigger("Shoot");
-        // muzzle.Play();
-
         Vector3 direction = playerCam.transform.forward;
         Vector3 spread = new Vector3();
 
@@ -112,6 +113,7 @@ public class Shotgun : MonoBehaviour
 
             if (hitObject.CompareTag("Enemy"))
             {
+                hud.hitmarker.enabled = true;
                 stats.shotsHit++;
                 Health targetHP = hitObject.GetComponent<Health>();
                 targetHP.TakeDamage(damage);
@@ -124,9 +126,6 @@ public class Shotgun : MonoBehaviour
         {
             Debug.DrawRay(playerCam.transform.position, direction, Color.red, 2);
         }
-
-        // animator.SetTrigger("Shoot");
-
     }
 
     void Reload()
@@ -155,7 +154,18 @@ public class Shotgun : MonoBehaviour
         } else {
             Reload();
         }
-           
+    }
 
+    void Hitmarker()
+    {
+        if (hud.hitmarker.enabled == true)
+        {
+            hTimer = hTimer + Time.deltaTime;
+            if (hTimer >= hitTimer)
+            {
+                hud.hitmarker.enabled = false;
+                hTimer = 0;
+            }
+        }
     }
 }

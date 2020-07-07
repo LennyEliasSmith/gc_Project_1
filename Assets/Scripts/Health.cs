@@ -10,6 +10,7 @@ public class Health : MonoBehaviour
 
     public AudioSource deathSound;
     public AudioClip[] audioSources;
+    public AudioSource hitSound;
 
     public SpriteRenderer sprite;
 
@@ -26,6 +27,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float dmg)
     {
+        hitSound.Play();
         currentHP = currentHP - dmg;
 
         if (currentHP <= 0)

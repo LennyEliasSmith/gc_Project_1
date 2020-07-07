@@ -15,6 +15,7 @@ public class AssaultRifle : MonoBehaviour
 
     private Camera playerCam;
     private GameObject hitObject;
+    private PlayerHUD hud;
 
     public AudioSource gunAudio;
     public AudioClip gunShoot;
@@ -25,12 +26,17 @@ public class AssaultRifle : MonoBehaviour
     public WeaponStats stats;
 
     public Animator animator;
-    
+
+    public float hitTimer;
+    public float hTimer;
+
     void Start()
     {
         playerCam = GetComponentInParent<Camera>();
         ammo = GetComponent<WeaponAmmo>();
         stats = GetComponent<WeaponStats>();
+        hud = GetComponentInParent<PlayerHUD>();
+
 
         AudioSource[] sources = GetComponentsInChildren<AudioSource>();
 
@@ -54,6 +60,8 @@ public class AssaultRifle : MonoBehaviour
                 Shoot();
             }
         }
+
+        Hitmarker();
 
         if (Input.GetButtonDown("Reload") && !isReloading && ammo.currentAmmo != ammo.maxAmmo)
         {
@@ -92,6 +100,7 @@ public class AssaultRifle : MonoBehaviour
 
             if (hitObject.CompareTag("Enemy"))
             {
+                hud.hitmarker.enabled = true;
                 stats.shotsHit++;
                 Health targetHP = hitObject.GetComponent<Health>();
                 targetHP.TakeDamage(damage);
@@ -104,6 +113,19 @@ public class AssaultRifle : MonoBehaviour
         isShooting = false;
         // animator.SetTrigger("Shoot");
 
+    }
+
+    void Hitmarker()
+    {
+        if (hud.hitmarker.enabled == true)
+        {
+            hTimer = hTimer + Time.deltaTime;
+            if (hTimer >= hitTimer)
+            {
+                hud.hitmarker.enabled = false;
+                hTimer = 0;
+            }
+        }
     }
 
     IEnumerator Reload()

@@ -15,6 +15,7 @@ public class Pistol : MonoBehaviour
 
     private Camera playerCam;
     private GameObject hitObject;
+    private PlayerHUD hud;
 
     public AudioSource gunAudio;
     public AudioClip gunShoot;
@@ -26,6 +27,9 @@ public class Pistol : MonoBehaviour
 
     public Animator animator;
 
+    public float hitTimer;
+    public float hTimer;
+
 
     // Start is called before the first frame update 
     void Start()
@@ -33,6 +37,7 @@ public class Pistol : MonoBehaviour
         playerCam = GetComponentInParent<Camera>();
         ammo = GetComponent<WeaponAmmo>();
         stats = GetComponent<WeaponStats>();
+        hud = GetComponentInParent<PlayerHUD>();
 
         AudioSource[] sources = GetComponentsInChildren<AudioSource>();
 
@@ -63,6 +68,8 @@ public class Pistol : MonoBehaviour
         {
             StartCoroutine(Reload());
         }
+
+        Hitmarker();
     }
 
     void Shoot()
@@ -90,6 +97,7 @@ public class Pistol : MonoBehaviour
 
             if (hitObject.CompareTag("Enemy"))
             {
+                hud.hitmarker.enabled = true;
                 stats.shotsHit++;
                 Health targetHP = hitObject.GetComponent<Health>();
                 targetHP.TakeDamage(damage);
@@ -102,6 +110,19 @@ public class Pistol : MonoBehaviour
         isShooting = false;
         animator.SetTrigger("Shoot");
 
+    }
+
+    void Hitmarker()
+    {
+        if (hud.hitmarker.enabled == true)
+        {
+            hTimer = hTimer + Time.deltaTime;
+            if (hTimer >= hitTimer)
+            {
+                hud.hitmarker.enabled = false;
+                hTimer = 0;
+            }
+        }
     }
 
     IEnumerator Reload()

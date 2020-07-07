@@ -8,6 +8,9 @@ public class PlayerHUD : MonoBehaviour
     public Text ammoCount;
     public Text killCount;
 
+    public Image crosshair;
+    public Image hitmarker;
+
     public WeaponAmmo ammo;
     public WeaponStats statsPSTL;
     public WeaponStats statsSHTG;
@@ -20,6 +23,7 @@ public class PlayerHUD : MonoBehaviour
     void Start()
     {
         ammo = GetComponentInChildren<WeaponAmmo>();
+        hitmarker.enabled = false;
 
     }
 
