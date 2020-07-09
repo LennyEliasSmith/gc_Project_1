@@ -15,6 +15,7 @@ public class PlayerHUD : MonoBehaviour
     public WeaponStats statsPSTL;
     public WeaponStats statsSHTG;
     public WeaponStats statsAR;
+    public Health health;
     public float kills;
 
     public string ammoString;
