@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class Shotgun : MonoBehaviour
+public class AssaultRifle : MonoBehaviour
 {
     public float damage;
+    public float gunSpread;
     public float fireRate;
     public float nextTimeToFire;
     public float reloadTime;
-    public int shotgunShots;
 
     public bool isReloading;
     public bool isShooting;
@@ -21,19 +20,16 @@ public class Shotgun : MonoBehaviour
     public AudioSource gunAudio;
     public AudioClip gunShoot;
     public AudioClip gunReload;
-    public AudioClip gunShell;
 
+    public ParticleSystem muzzle;
     public WeaponAmmo ammo;
     public WeaponStats stats;
-    public ParticleSystem muzzle;
 
     public Animator animator;
 
     public float hitTimer;
     public float hTimer;
 
-
-    // Start is called before the first frame update 
     void Start()
     {
         playerCam = GetComponentInParent<Camera>();
@@ -41,75 +37,66 @@ public class Shotgun : MonoBehaviour
         stats = GetComponent<WeaponStats>();
         hud = GetComponentInParent<PlayerHUD>();
 
+
         AudioSource[] sources = GetComponentsInChildren<AudioSource>();
 
         gunAudio = sources[0];
         gunShoot = sources[0].clip;
         gunReload = sources[1].clip;
-        gunShell = sources[2].clip;
 
-        muzzle = GetComponentInChildren<ParticleSystem>();
+        // muzzle = GetComponentInChildren<ParticleSystem>();
 
         isReloading = false;
-
     }
 
-    // Update is called once per frame 
+    // Update is called once per frame
     void Update()
     {
-
         if (ammo.currentAmmo > 0 && !isReloading && !isShooting && Time.time >= nextTimeToFire)
         {
-
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButton("Fire1"))
             {
                 nextTimeToFire = Time.time + 1f / fireRate;
-                isShooting = true;
+                Shoot();
             }
-        }
-
-        if (isShooting)
-        {
-            gunAudio.PlayOneShot(gunShoot);
-            animator.SetTrigger("Shoot");
-            muzzle.Play();
-
-            for (int i = 0; i < shotgunShots; i++)
-            {       
-                ShotgunShot();
-            }
-
-            stats.shotsFired++;
-            ammo.currentAmmo--;
-            isShooting = false;
-        }
-
-        if (Input.GetButtonDown("Reload") && !isReloading && ammo.currentAmmo != ammo.maxAmmo)
-        {
-            isReloading = true;
-            Reload();
         }
 
         Hitmarker();
+
+        if (Input.GetButtonDown("Reload") && !isReloading && ammo.currentAmmo != ammo.maxAmmo)
+        {
+            StartCoroutine(Reload());
+        }
     }
 
-    void ShotgunShot()
+    void Shoot()
     {
+
+        isShooting = true;
+
+        Debug.Log("PewPew");
+
+        gunAudio.PlayOneShot(gunShoot);
+        // animator.SetTrigger("Shoot");
+        // muzzle.Play();
+
+        stats.shotsFired++;
+
         Vector3 direction = playerCam.transform.forward;
         Vector3 spread = new Vector3();
 
-        spread += playerCam.transform.up * Random.Range(-1f, 1f);
-        spread += playerCam.transform.right * Random.Range(-1f, 1f);
-        direction += spread.normalized * Random.Range(0f, 0.1f);
+        spread += playerCam.transform.up * Random.Range(-gunSpread, gunSpread);
+        spread += playerCam.transform.right * Random.Range(-gunSpread, gunSpread);
+        direction += spread.normalized * Random.Range(0f, gunSpread);
 
         RaycastHit hit;
 
         if (Physics.Raycast(playerCam.transform.position, direction, out hit))
         {
-            
-            Debug.DrawLine(playerCam.transform.position, hit.point, Color.green, 2);
             hitObject = hit.transform.gameObject;
+
             Debug.Log(hitObject);
+            Debug.DrawLine(playerCam.transform.position, hit.point, Color.green, 2);
 
             if (hitObject.CompareTag("Enemy"))
             {
@@ -117,43 +104,15 @@ public class Shotgun : MonoBehaviour
                 stats.shotsHit++;
                 Health targetHP = hitObject.GetComponent<Health>();
                 targetHP.TakeDamage(damage);
-                // if (targetHP.currentHP <= 0)
-                    // stats.killCount++;
-                    
+                if (targetHP.currentHP <= 0)
+                    stats.killCount++;
             }
         }
-        else
-        {
-            Debug.DrawRay(playerCam.transform.position, direction, Color.red, 2);
-        }
-    }
 
-    void Reload()
-    {
-        StartCoroutine(ShotgunReload());
-    }
+        ammo.currentAmmo--;
+        isShooting = false;
+        // animator.SetTrigger("Shoot");
 
-    IEnumerator ShotgunReload()
-    {
-
-        Debug.Log("Reloading...");
-
-        // animator.SetTrigger("Reload");
-
-        ammo.currentAmmo++;
-
-        gunAudio.PlayOneShot(gunShell);
-
-        yield return new WaitForSeconds(reloadTime);
-
-        Debug.Log("Loaded shell");
-
-        if (ammo.currentAmmo == ammo.maxAmmo)
-        {
-            isReloading = false;
-        } else {
-            Reload();
-        }
     }
 
     void Hitmarker()
@@ -167,5 +126,23 @@ public class Shotgun : MonoBehaviour
                 hTimer = 0;
             }
         }
+    }
+
+    IEnumerator Reload()
+    {
+
+        Debug.Log("Reloading...");
+        // animator.SetTrigger("Reload");
+        gunAudio.PlayOneShot(gunReload);
+
+        isReloading = true;
+
+        yield return new WaitForSeconds(reloadTime);
+
+        ammo.Reload();
+
+        Debug.Log("Finished reload");
+
+        isReloading = false;
     }
 }
