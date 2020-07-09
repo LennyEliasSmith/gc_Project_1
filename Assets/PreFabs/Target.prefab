@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7854954806926978580}
   m_Layer: 0
   m_Name: Target
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,11 +47,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetObj: {fileID: 7854954806926978586}
   targetRb: {fileID: 7854954806926978580}
+  player: {fileID: 0}
   speed: 2
   distance: 4
   range: 10
   isTargetActive: 0
-  isTargetMoving: 1
+  isTargetMovingHorizontal: 0
+  isTargetMovingVertical: 0
+  isTargetAttacking: 0
 --- !u!50 &7854954806926978580
 Rigidbody2D:
   serializedVersion: 4
