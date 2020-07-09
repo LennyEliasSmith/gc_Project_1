@@ -1320,7 +1320,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9afcab378fa8f1e4d986d73e0398f767, type: 3}
+  m_Sprite: {fileID: 407602523924423663, guid: 20343f5b8c8205f4a8d7c9498bfce1cf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2252,6 +2252,7 @@ MonoBehaviour:
   statsPSTL: {fileID: 7239290408525126314}
   statsSHTG: {fileID: 2200299894054464026}
   statsAR: {fileID: 2314241315611290499}
+  health: {fileID: 0}
   kills: 0
   ammoString: 
 --- !u!1001 &7782904815682600109
