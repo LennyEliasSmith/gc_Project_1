@@ -318,7 +318,7 @@ GameObject:
   - component: {fileID: 31779426}
   - component: {fileID: 31779425}
   - component: {fileID: 31779424}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -505,6 +505,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: slope (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5337260203080101042, guid: 3e5593e417ce526468bed40a1e8445ac,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8956138177446141601, guid: 3e5593e417ce526468bed40a1e8445ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -588,6 +593,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: slope (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337260203080101042, guid: 3e5593e417ce526468bed40a1e8445ac,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8956138177446141601, guid: 3e5593e417ce526468bed40a1e8445ac,
         type: 3}
@@ -892,7 +902,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 192151690}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Layout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1033,7 +1043,7 @@ GameObject:
   - component: {fileID: 265640685}
   - component: {fileID: 265640684}
   - component: {fileID: 265640683}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1126,7 +1136,7 @@ GameObject:
   - component: {fileID: 306174850}
   - component: {fileID: 306174849}
   - component: {fileID: 306174848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1596,21 +1606,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fde271d42a4c1845822b616047f2a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
   fireRate: 1
   nextTimeToFire: 0
-  maxAmmo: 5
-  ammo: 4
   reloadTime: 0
-  killCount: 0
-  shotsFired: 0
-  accuracy: 0
   isReloading: 0
   isShooting: 0
   gunAudio: {fileID: 0}
   gunShoot: {fileID: 0}
   gunReload: {fileID: 0}
   muzzle: {fileID: 0}
+  ammo: {fileID: 0}
+  stats: {fileID: 0}
   animator: {fileID: 2131555985}
+  hitTimer: 0
+  hTimer: 0
 --- !u!1 &491984289
 GameObject:
   m_ObjectHideFlags: 0
@@ -1623,7 +1633,7 @@ GameObject:
   - component: {fileID: 491984292}
   - component: {fileID: 491984291}
   - component: {fileID: 491984290}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1727,6 +1737,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: slope (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337260203080101042, guid: 3e5593e417ce526468bed40a1e8445ac,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8956138177446141601, guid: 3e5593e417ce526468bed40a1e8445ac,
         type: 3}
@@ -2196,7 +2211,7 @@ GameObject:
   - component: {fileID: 688726763}
   - component: {fileID: 688726762}
   - component: {fileID: 688726761}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2414,7 +2429,7 @@ GameObject:
   - component: {fileID: 745551784}
   - component: {fileID: 745551783}
   - component: {fileID: 745551782}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2598,6 +2613,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: slope (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337260203080101042, guid: 3e5593e417ce526468bed40a1e8445ac,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8956138177446141601, guid: 3e5593e417ce526468bed40a1e8445ac,
         type: 3}
@@ -2963,7 +2983,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 864828337}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Slopes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3158,7 +3178,7 @@ GameObject:
   - component: {fileID: 907569158}
   - component: {fileID: 907569157}
   - component: {fileID: 907569156}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3251,7 +3271,7 @@ GameObject:
   - component: {fileID: 944533317}
   - component: {fileID: 944533316}
   - component: {fileID: 944533315}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3350,7 +3370,7 @@ GameObject:
   - component: {fileID: 1149142957}
   - component: {fileID: 1149142956}
   - component: {fileID: 1149142955}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3443,6 +3463,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: slope (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5337260203080101042, guid: 3e5593e417ce526468bed40a1e8445ac,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8956138177446141601, guid: 3e5593e417ce526468bed40a1e8445ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3526,6 +3551,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: slope (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337260203080101042, guid: 3e5593e417ce526468bed40a1e8445ac,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8956138177446141601, guid: 3e5593e417ce526468bed40a1e8445ac,
         type: 3}
@@ -3797,6 +3827,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: slope (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5337260203080101042, guid: 3e5593e417ce526468bed40a1e8445ac,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8956138177446141601, guid: 3e5593e417ce526468bed40a1e8445ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3880,6 +3915,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: slope (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337260203080101042, guid: 3e5593e417ce526468bed40a1e8445ac,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8956138177446141601, guid: 3e5593e417ce526468bed40a1e8445ac,
         type: 3}
@@ -4247,6 +4287,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: slope (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337260203080101042, guid: 3e5593e417ce526468bed40a1e8445ac,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8956138177446141601, guid: 3e5593e417ce526468bed40a1e8445ac,
         type: 3}
@@ -5428,6 +5473,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: slope (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5337260203080101042, guid: 3e5593e417ce526468bed40a1e8445ac,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8956138177446141601, guid: 3e5593e417ce526468bed40a1e8445ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5894,6 +5944,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: slope (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337260203080101042, guid: 3e5593e417ce526468bed40a1e8445ac,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8956138177446141601, guid: 3e5593e417ce526468bed40a1e8445ac,
         type: 3}

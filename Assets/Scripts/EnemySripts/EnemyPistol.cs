@@ -8,6 +8,7 @@ public class EnemyPistol : MonoBehaviour
     public float fireRate;
     public float nextTimeToFire;
     public float gunSpread;
+    public float reactionTime;
 
     public Vector3 direction;
     public bool playerLOS;
