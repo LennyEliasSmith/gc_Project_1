@@ -22,18 +22,38 @@ public class EnemyMovement : MonoBehaviour
     void FixedUpdate()
     {
         float distance = Vector3.Distance(player.position, transform.position);
-
-        if (distance < range)
+        if (LineOfSight())
         {
-            transform.LookAt(player);
+            if (distance < range)
+            {
+                transform.LookAt(player);
 
-            if(distance > stoppingDistance)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-            } else if(distance < retreatDistance)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
+                if (distance > stoppingDistance)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+                }
+                else if (distance < retreatDistance)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
+                }
             }
         }
+    }
+
+    bool LineOfSight()
+    {
+        RaycastHit hit;
+
+        Vector3 direction = player.position - transform.position;
+        Debug.DrawRay(transform.position, direction, Color.red);
+
+        if(Physics.Raycast(transform.position, direction, out hit, range))
+        {
+            if(hit.transform.CompareTag("Player"))
+            {
+                return true; 
+            }
+        }
+        return false;
     }
 }
