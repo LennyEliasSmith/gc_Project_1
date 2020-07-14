@@ -7,9 +7,11 @@ public class PlayerHUD : MonoBehaviour
 {
     public Text ammoCount;
     public Text killCount;
+    public Text hpamount;
 
     public Image crosshair;
     public Image hitmarker;
+    public Image healthbar;
 
     public WeaponAmmo ammo;
     public WeaponStats statsPSTL;
@@ -24,6 +26,7 @@ public class PlayerHUD : MonoBehaviour
     void Start()
     {
         ammo = GetComponentInChildren<WeaponAmmo>();
+        health = GetComponentInParent<Health>();
         hitmarker.enabled = false;
 
     }
@@ -31,14 +34,30 @@ public class PlayerHUD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ammo = GetComponentInChildren<WeaponAmmo>();
+        HealthBar();
+        SetAmmo();
+        SetKills();
+    }
 
+    public void HealthBar()
+    {
+        // hpamount.text = health.currentHP.ToString();
+        healthbar.fillAmount = health.currentHP / health.maxHP;
+        // P1_HpText.text = P1_Hp.health + " / " + P1_Hp.maxhealth;
+    }
+
+    void SetAmmo()
+    {
+        ammo = GetComponentInChildren<WeaponAmmo>();
         // ammoString = player.ammo.ToString() + " / " + player.maxAmmo.ToString();
         ammoCount.text = ammo.currentAmmo.ToString() + " / " + ammo.maxAmmo.ToString();
         // ammoCount.text = ammoString;
+    }
 
+    void SetKills()
+    {
         kills = statsPSTL.killCount + statsSHTG.killCount + statsAR.killCount;
-
         killCount.text = kills.ToString();
     }
 }
+

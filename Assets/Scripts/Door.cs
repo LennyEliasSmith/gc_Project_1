@@ -53,7 +53,7 @@ public class Door : MonoBehaviour
 
     void OpenDoor()
     {
-        Debug.Log("Door opening");
+        // Debug.Log("Door opening");
         if(transform.position.y < openPos.y)
         {
             transform.position = new Vector3(transform.position.x, (transform.position.y + (Time.deltaTime * doorSpeed)), transform.position.z);
@@ -68,7 +68,7 @@ public class Door : MonoBehaviour
 
     void CloseDoor()
     {
-        Debug.Log("Door closing");
+        // Debug.Log("Door closing");
         if (transform.position.y > closedPos.y)
         {
             transform.position = new Vector3(transform.position.x, (transform.position.y - (Time.deltaTime * doorSpeed)), transform.position.z);

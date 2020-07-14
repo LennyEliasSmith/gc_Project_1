@@ -285,6 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: {fileID: 9111150572869997468}
   colliders: []
+  weapon: {fileID: 0}
 --- !u!114 &9111150572869997468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,12 +302,15 @@ MonoBehaviour:
   maxHP: 10
   deathTime: 0.5
   deathSound: {fileID: 365461502549153317}
-  audioSources:
-  - {fileID: 8300000, guid: 01f35b33f721d6447bab4bfd1618349b, type: 3}
-  - {fileID: 8300000, guid: 9bd081c9619502249b8aa13f583ea5f3, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: 6b52450c2bf31d141b26c677ab066cd1, type: 3}
   - {fileID: 8300000, guid: aade4c324e6fba543ae9476704257039, type: 3}
   - {fileID: 8300000, guid: 18dd0c15ebbd46e4da79472135c6dbb4, type: 3}
   hitSound: {fileID: 5375900028726090494}
+  hitSounds:
+  - {fileID: 8300000, guid: 01f35b33f721d6447bab4bfd1618349b, type: 3}
+  - {fileID: 8300000, guid: 9bd081c9619502249b8aa13f583ea5f3, type: 3}
+  - {fileID: 8300000, guid: b58318bcf39c2474f93a7d88f7e11f1f, type: 3}
   sprite: {fileID: 7623159504374525050}
 --- !u!114 &6188622923803052003
 MonoBehaviour:
@@ -324,6 +328,8 @@ MonoBehaviour:
   fireRate: 0.5
   nextTimeToFire: 0
   gunSpread: 0.2
+  reactionTime: 0
+  rTimer: 0
   direction: {x: 0, y: 0, z: 0}
   playerLOS: 0
   animator: {fileID: 8588791072293604285}

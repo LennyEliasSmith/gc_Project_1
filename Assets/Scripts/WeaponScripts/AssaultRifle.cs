@@ -74,7 +74,7 @@ public class AssaultRifle : MonoBehaviour
 
         isShooting = true;
 
-        Debug.Log("PewPew");
+        // Debug.Log("PewPew");
 
         gunAudio.PlayOneShot(gunShoot);
         // animator.SetTrigger("Shoot");
@@ -95,7 +95,7 @@ public class AssaultRifle : MonoBehaviour
         {
             hitObject = hit.transform.gameObject;
 
-            Debug.Log(hitObject);
+            // Debug.Log(hitObject);
             Debug.DrawLine(playerCam.transform.position, hit.point, Color.green, 2);
 
             if (hitObject.CompareTag("Enemy"))
@@ -131,7 +131,7 @@ public class AssaultRifle : MonoBehaviour
     IEnumerator Reload()
     {
 
-        Debug.Log("Reloading...");
+        // Debug.Log("Reloading...");
         // animator.SetTrigger("Reload");
         gunAudio.PlayOneShot(gunReload);
 
@@ -141,7 +141,7 @@ public class AssaultRifle : MonoBehaviour
 
         ammo.Reload();
 
-        Debug.Log("Finished reload");
+        // Debug.Log("Finished reload");
 
         isReloading = false;
     }

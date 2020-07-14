@@ -9,8 +9,9 @@ public class Health : MonoBehaviour
     public float deathTime;
 
     public AudioSource deathSound;
-    public AudioClip[] audioSources;
+    public AudioClip[] deathSounds;
     public AudioSource hitSound;
+    public AudioClip[] hitSounds;
 
     public SpriteRenderer sprite;
 
@@ -22,32 +23,43 @@ public class Health : MonoBehaviour
 
     void Update()
     {
-        
+        if (currentHP > maxHP)
+            currentHP = maxHP;
     }
 
     public void TakeDamage(float dmg)
     {
-        hitSound.Play();
+        
         currentHP = currentHP - dmg;
 
         if (currentHP <= 0)
         {
             DeathSound();
-            sprite.enabled = false;
+            if(this.CompareTag("Enemy"))
+            {
+                sprite.enabled = false;
+            }
             StartCoroutine(Die());
-        }
+        } else
+            HurtSound();
     }
 
     IEnumerator Die()
     {
-        Debug.Log("death");
+        // Debug.Log("death");
         yield return new WaitForSeconds(deathTime);
         Destroy(this.gameObject);
     }
 
     void DeathSound()
     {
-        deathSound.clip = audioSources[Random.Range(0, audioSources.Length)];
+        deathSound.clip = deathSounds[Random.Range(0, deathSounds.Length)];
         deathSound.Play();
+    }
+
+    void HurtSound()
+    {
+        hitSound.clip = hitSounds[Random.Range(0, hitSounds.Length)];
+        hitSound.Play();
     }
 }

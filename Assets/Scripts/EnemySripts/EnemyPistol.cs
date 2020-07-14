@@ -9,6 +9,7 @@ public class EnemyPistol : MonoBehaviour
     public float nextTimeToFire;
     public float gunSpread;
     public float reactionTime;
+    public float rTimer;
 
     public Vector3 direction;
     public bool playerLOS;
@@ -34,11 +35,18 @@ public class EnemyPistol : MonoBehaviour
 
         if(playerLOS)
         {
-            if (Time.time >= nextTimeToFire)
-            { 
-                nextTimeToFire = Time.time + 1f / fireRate;
-                EnemyShoot();
+            rTimer = rTimer + Time.deltaTime;
+
+            if(rTimer >= reactionTime)
+            {
+                if (Time.time >= nextTimeToFire)
+                {
+                    nextTimeToFire = Time.time + 1f / fireRate;
+                    EnemyShoot();
+                }
             }
+        } else if (!playerLOS) {
+            rTimer = 0;
         }
     }
 
@@ -76,8 +84,15 @@ public class EnemyPistol : MonoBehaviour
         if (Physics.Raycast(transform.position, direction, out hit))
         {
             Debug.DrawLine(transform.position, hit.point, Color.blue, 2);
+            hitObject = hit.transform.gameObject;
             gunSound.Play();
             animator.SetTrigger("Shoot");
+
+            if (hitObject.CompareTag("Player"))
+            {
+                Health playerHP = hitObject.GetComponent<Health>();
+                playerHP.TakeDamage(damage);
+            }
         }
 
     }

@@ -109,7 +109,7 @@ public class Shotgun : MonoBehaviour
             
             Debug.DrawLine(playerCam.transform.position, hit.point, Color.green, 2);
             hitObject = hit.transform.gameObject;
-            Debug.Log(hitObject);
+            // Debug.Log(hitObject);
 
             if (hitObject.CompareTag("Enemy"))
             {
@@ -136,7 +136,7 @@ public class Shotgun : MonoBehaviour
     IEnumerator ShotgunReload()
     {
 
-        Debug.Log("Reloading...");
+        // Debug.Log("Reloading...");
 
         // animator.SetTrigger("Reload");
 
@@ -146,7 +146,7 @@ public class Shotgun : MonoBehaviour
 
         yield return new WaitForSeconds(reloadTime);
 
-        Debug.Log("Loaded shell");
+        // Debug.Log("Loaded shell");
 
         if (ammo.currentAmmo == ammo.maxAmmo)
         {

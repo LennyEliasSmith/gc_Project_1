@@ -7,6 +7,7 @@ public class TargetDummy : MonoBehaviour
 
     public Health hp;
     public BoxCollider[] colliders;
+    public EnemyPistol weapon;
 
     private Transform player;
 
@@ -15,6 +16,7 @@ public class TargetDummy : MonoBehaviour
     {
         hp = GetComponent<Health>();
         colliders = GetComponentsInChildren<BoxCollider>();
+        weapon = GetComponent<EnemyPistol>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -28,6 +30,7 @@ public class TargetDummy : MonoBehaviour
             for (int i = 0; i < colliders.Length; i++)
             {
                 Destroy(colliders[i]);
+                Destroy(weapon);
             }
         }
     }
