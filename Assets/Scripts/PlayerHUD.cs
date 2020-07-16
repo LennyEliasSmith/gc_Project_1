@@ -22,12 +22,18 @@ public class PlayerHUD : MonoBehaviour
 
     public string ammoString;
 
+    private GameObject managerObject;
+    private GameManager managerScript;
+
     // Start is called before the first frame update
     void Start()
     {
         ammo = GetComponentInChildren<WeaponAmmo>();
         health = GetComponentInParent<Health>();
         hitmarker.enabled = false;
+
+        managerObject = GameObject.FindGameObjectWithTag("GameManager");
+        managerScript = managerObject.GetComponent<GameManager>();
 
     }
 
@@ -56,7 +62,7 @@ public class PlayerHUD : MonoBehaviour
 
     void SetKills()
     {
-        kills = statsPSTL.killCount + statsSHTG.killCount + statsAR.killCount;
+        kills = managerScript.killCount;
         killCount.text = kills.ToString();
     }
 }

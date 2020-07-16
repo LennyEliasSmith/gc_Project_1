@@ -104,8 +104,8 @@ public class AssaultRifle : MonoBehaviour
                 stats.shotsHit++;
                 Health targetHP = hitObject.GetComponent<Health>();
                 targetHP.TakeDamage(damage);
-                if (targetHP.currentHP <= 0)
-                    stats.killCount++;
+                // if (targetHP.currentHP <= 0)
+                    // stats.killCount++;
             }
         }
 

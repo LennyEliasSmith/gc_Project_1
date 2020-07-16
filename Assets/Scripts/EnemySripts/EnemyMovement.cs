@@ -14,9 +14,12 @@ public class EnemyMovement : MonoBehaviour
     [Header ("References")]
     private Transform player;
 
+    private float startingYPos;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        startingYPos = transform.position.y;
     }
 
     void FixedUpdate()
@@ -30,11 +33,13 @@ public class EnemyMovement : MonoBehaviour
 
                 if (distance > stoppingDistance)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+                    Vector3 newPos = new Vector3(transform.position.x, startingYPos, transform.position.z);
+                    transform.position = Vector3.MoveTowards(newPos, player.position, speed * Time.deltaTime);
                 }
                 else if (distance < retreatDistance)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
+                    Vector3 newPos = new Vector3(transform.position.x, startingYPos, transform.position.z);
+                    transform.position = Vector3.MoveTowards(newPos, player.position, -speed * Time.deltaTime);
                 }
             }
         }
@@ -56,4 +61,5 @@ public class EnemyMovement : MonoBehaviour
         }
         return false;
     }
+
 }

@@ -17,7 +17,7 @@ public class TargetDummy : MonoBehaviour
         hp = GetComponent<Health>();
         colliders = GetComponentsInChildren<BoxCollider>();
         weapon = GetComponent<EnemyPistol>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("playerTarget").transform;
     }
 
     // Update is called once per frame

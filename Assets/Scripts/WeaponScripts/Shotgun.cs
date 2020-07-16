@@ -20,8 +20,8 @@ public class Shotgun : MonoBehaviour
 
     public AudioSource gunAudio;
     public AudioClip gunShoot;
-    public AudioClip gunReload;
     public AudioClip gunShell;
+    public AudioClip gunPump;
 
     public WeaponAmmo ammo;
     public WeaponStats stats;
@@ -45,7 +45,7 @@ public class Shotgun : MonoBehaviour
 
         gunAudio = sources[0];
         gunShoot = sources[0].clip;
-        gunReload = sources[1].clip;
+        gunPump = sources[1].clip;
         gunShell = sources[2].clip;
 
         muzzle = GetComponentInChildren<ParticleSystem>();
@@ -87,6 +87,7 @@ public class Shotgun : MonoBehaviour
         if (Input.GetButtonDown("Reload") && !isReloading && ammo.currentAmmo != ammo.maxAmmo)
         {
             isReloading = true;
+            animator.SetTrigger("InsertFirstShell");
             Reload();
         }
 
@@ -138,8 +139,6 @@ public class Shotgun : MonoBehaviour
 
         // Debug.Log("Reloading...");
 
-        // animator.SetTrigger("Reload");
-
         ammo.currentAmmo++;
 
         gunAudio.PlayOneShot(gunShell);
@@ -150,8 +149,14 @@ public class Shotgun : MonoBehaviour
 
         if (ammo.currentAmmo == ammo.maxAmmo)
         {
+            Debug.Log("Finished Reload");
+            animator.SetTrigger("FinishReload");
+            gunAudio.PlayOneShot(gunPump);
             isReloading = false;
-        } else {
+
+        }
+        else {
+            animator.SetTrigger("InsertShell");
             Reload();
         }
     }

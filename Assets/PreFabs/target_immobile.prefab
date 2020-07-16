@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHP: 0
-  maxHP: 10
+  maxHP: 20
   deathTime: 0.5
   deathSound: {fileID: 365461502549153317}
   deathSounds:

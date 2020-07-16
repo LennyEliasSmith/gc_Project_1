@@ -8,6 +8,8 @@ public class Health : MonoBehaviour
     public float maxHP;
     public float deathTime;
 
+    private bool isDead;
+
     public AudioSource deathSound;
     public AudioClip[] deathSounds;
     public AudioSource hitSound;
@@ -15,10 +17,17 @@ public class Health : MonoBehaviour
 
     public SpriteRenderer sprite;
 
+    private GameObject managerObject;
+    private GameManager managerScript;
+
     void Start()
     {
         currentHP = maxHP;
         sprite = GetComponent<SpriteRenderer>();
+        managerObject = GameObject.FindGameObjectWithTag("GameManager");
+        managerScript = managerObject.GetComponent<GameManager>();
+        isDead = false;
+
     }
 
     void Update()
@@ -32,9 +41,13 @@ public class Health : MonoBehaviour
         
         currentHP = currentHP - dmg;
 
+        if (isDead)
+            return;
+
         if (currentHP <= 0)
         {
             DeathSound();
+            isDead = true;
             if(this.CompareTag("Enemy"))
             {
                 sprite.enabled = false;
@@ -46,8 +59,12 @@ public class Health : MonoBehaviour
 
     IEnumerator Die()
     {
+        if (this.gameObject.CompareTag("Enemy"))
+            managerScript.killCount++;
+
         // Debug.Log("death");
         yield return new WaitForSeconds(deathTime);
+        
         Destroy(this.gameObject);
     }
 
