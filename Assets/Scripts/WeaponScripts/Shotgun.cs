@@ -57,10 +57,10 @@ public class Shotgun : MonoBehaviour
     // Update is called once per frame 
     void Update()
     {
+        // AnimationLogic();
 
         if (ammo.currentAmmo > 0 && !isReloading && !isShooting && Time.time >= nextTimeToFire)
         {
-
             if (Input.GetButtonDown("Fire1"))
             {
                 nextTimeToFire = Time.time + 1f / fireRate;
@@ -89,6 +89,14 @@ public class Shotgun : MonoBehaviour
             isReloading = true;
             animator.SetTrigger("InsertFirstShell");
             Reload();
+        }
+
+        if(isReloading && (Input.GetButtonDown("Fire1")))
+        {
+            isReloading = false;
+            gunAudio.PlayOneShot(gunPump);
+            animator.SetTrigger("FinishReload");
+            animator.ResetTrigger("InsertShell");
         }
 
         Hitmarker();
@@ -153,9 +161,9 @@ public class Shotgun : MonoBehaviour
             animator.SetTrigger("FinishReload");
             gunAudio.PlayOneShot(gunPump);
             isReloading = false;
-
         }
-        else {
+        else if (isReloading)
+        {
             animator.SetTrigger("InsertShell");
             Reload();
         }
@@ -173,4 +181,23 @@ public class Shotgun : MonoBehaviour
             }
         }
     }
+
+    /* void AnimationLogic()
+    {
+        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("shotgun_reload")
+            || this.animator.GetCurrentAnimatorStateInfo(0).IsName("shotgun_reload_loop")
+            || this.animator.GetCurrentAnimatorStateInfo(0).IsName("shotgun_reload_loop 0")
+            || this.animator.GetCurrentAnimatorStateInfo(0).IsName("shotgun_reload_finish")) {
+            isReloading = true;
+        } else
+            isReloading = false;
+
+        if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("shotgunIdle")) 
+        {
+            animator.ResetTrigger("FinishReload");
+            animator.ResetTrigger("InsertShell");
+            animator.ResetTrigger("InsertFirstShell");
+            animator.ResetTrigger("Shoot");
+        }
+    } */
 }
