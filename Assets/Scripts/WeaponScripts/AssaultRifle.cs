@@ -22,6 +22,8 @@ public class AssaultRifle : MonoBehaviour
     public AudioClip gunReload;
 
     public ParticleSystem muzzle;
+    public ParticleSystem blood;
+
     public WeaponAmmo ammo;
     public WeaponStats stats;
 
@@ -44,7 +46,7 @@ public class AssaultRifle : MonoBehaviour
         gunShoot = sources[0].clip;
         gunReload = sources[1].clip;
 
-        // muzzle = GetComponentInChildren<ParticleSystem>();
+        muzzle = GetComponentInChildren<ParticleSystem>();
 
         isReloading = false;
     }
@@ -58,7 +60,16 @@ public class AssaultRifle : MonoBehaviour
             {
                 nextTimeToFire = Time.time + 1f / fireRate;
                 Shoot();
+            } else {
+                animator.SetBool("isShooting", false);
+                // muzzle.Stop();
             }
+        }
+
+        if (ammo.currentAmmo == 0)
+        {
+            animator.SetBool("isShooting", false);
+
         }
 
         Hitmarker();
@@ -71,14 +82,12 @@ public class AssaultRifle : MonoBehaviour
 
     void Shoot()
     {
+        muzzle.Play();
 
         isShooting = true;
 
-        // Debug.Log("PewPew");
-
         gunAudio.PlayOneShot(gunShoot);
-        // animator.SetTrigger("Shoot");
-        // muzzle.Play();
+        animator.SetBool("isShooting", true);
 
         stats.shotsFired++;
 
@@ -101,12 +110,16 @@ public class AssaultRifle : MonoBehaviour
             if (hitObject.CompareTag("Enemy"))
             {
                 hud.hitmarker.enabled = true;
+                ParticleSystem bloodClone = Instantiate(blood, hit.point, Quaternion.LookRotation(hit.normal));
+                bloodClone.gameObject.AddComponent<CleanUp>();
                 stats.shotsHit++;
                 Health targetHP = hitObject.GetComponent<Health>();
                 targetHP.TakeDamage(damage);
                 // if (targetHP.currentHP <= 0)
                     // stats.killCount++;
+
             }
+
         }
 
         ammo.currentAmmo--;

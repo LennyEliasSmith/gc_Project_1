@@ -26,6 +26,7 @@ public class Shotgun : MonoBehaviour
     public WeaponAmmo ammo;
     public WeaponStats stats;
     public ParticleSystem muzzle;
+    public ParticleSystem blood;
 
     public Animator animator;
 
@@ -66,7 +67,14 @@ public class Shotgun : MonoBehaviour
                 nextTimeToFire = Time.time + 1f / fireRate;
                 isShooting = true;
             }
+
+            if (Input.GetButtonDown("Fire2"))
+            {
+                DebugAnimation();
+            }
         }
+
+       
 
         if (isShooting)
         {
@@ -91,12 +99,12 @@ public class Shotgun : MonoBehaviour
             Reload();
         }
 
-        if(isReloading && (Input.GetButtonDown("Fire1")))
+        if(isReloading && (Input.GetButtonDown("Fire1") && ammo.currentAmmo != ammo.maxAmmo))
         {
             isReloading = false;
             gunAudio.PlayOneShot(gunPump);
-            animator.SetTrigger("FinishReload");
             animator.ResetTrigger("InsertShell");
+            animator.SetTrigger("FinishReload");
         }
 
         Hitmarker();
@@ -123,6 +131,8 @@ public class Shotgun : MonoBehaviour
             if (hitObject.CompareTag("Enemy"))
             {
                 hud.hitmarker.enabled = true;
+                ParticleSystem bloodClone = Instantiate(blood, hit.point, Quaternion.LookRotation(hit.normal));
+                bloodClone.gameObject.AddComponent<CleanUp>();
                 stats.shotsHit++;
                 Health targetHP = hitObject.GetComponent<Health>();
                 targetHP.TakeDamage(damage);
@@ -180,6 +190,14 @@ public class Shotgun : MonoBehaviour
                 hTimer = 0;
             }
         }
+    }
+
+    void DebugAnimation()
+    {
+        animator.ResetTrigger("FinishReload");
+        animator.ResetTrigger("InsertShell");
+        animator.ResetTrigger("InsertFirstShell");
+        animator.ResetTrigger("Shoot");
     }
 
     /* void AnimationLogic()

@@ -64,7 +64,10 @@ public class Health : MonoBehaviour
 
         // Debug.Log("death");
         yield return new WaitForSeconds(deathTime);
-        
+
+        if (this.gameObject.CompareTag("Player"))
+            managerScript.PlayerDeath();
+
         Destroy(this.gameObject);
     }
 
