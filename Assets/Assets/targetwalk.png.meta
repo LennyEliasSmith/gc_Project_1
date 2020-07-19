@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 4561b2df3e921374d8550cf881af5e77
+guid: 7ec7bd4ec15201b40b7f210fea070ce0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4932221575101545105
-    second: targetshooting_0
+      213: 1001607001008946578
+    second: targetwalk_0
   - first:
-      213: 907171454107656722
-    second: targetshooting_1
+      213: 941612365954446839
+    second: targetwalk_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -53,7 +53,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -93,7 +93,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: targetshooting_0
+      name: targetwalk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -107,14 +107,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f650e860c9a3d8bb0800000000000000
-      internalID: -4932221575101545105
+      spriteID: 29dbeabb24c66ed00800000000000000
+      internalID: 1001607001008946578
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: targetshooting_1
+      name: targetwalk_1
       rect:
         serializedVersion: 2
         x: 32
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 212267091abe69c00800000000000000
-      internalID: 907171454107656722
+      spriteID: 7f574dc3577411d00800000000000000
+      internalID: 941612365954446839
       vertices: []
       indices: 
       edges: []
@@ -137,7 +137,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: aec1f3861b6f7d049a5e16a7f704104e
+    spriteID: 6c87da17d91d4bd45bfb6ddc167c1af1
     internalID: 0
     vertices: []
     indices: 
