@@ -64,6 +64,71 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 365461502549153317, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: MinDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 365461502549153317, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 365461502549153317, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 365461502549153317, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 365461502549153317, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 365461502549153317, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 885731935352685557, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: MinDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 885731935352685557, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 885731935352685557, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 885731935352685557, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 885731935352685557, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 885731935352685557, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 885731935352685557, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1857194807133236317, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
         type: 3}
       propertyPath: m_Name
@@ -73,6 +138,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5375900028726090494, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: MinDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5375900028726090494, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5375900028726090494, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5375900028726090494, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: rolloffMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5375900028726090494, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5375900028726090494, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].time
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5799977819828358885, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2,
         type: 3}

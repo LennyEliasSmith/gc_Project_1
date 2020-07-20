@@ -22,6 +22,8 @@ public class Pistol : MonoBehaviour
     public AudioClip gunReload;
 
     public ParticleSystem muzzle;
+    public ParticleSystem blood;
+
     public WeaponAmmo ammo;
     public WeaponStats stats;
 
@@ -98,6 +100,8 @@ public class Pistol : MonoBehaviour
             if (hitObject.CompareTag("Enemy"))
             {
                 hud.hitmarker.enabled = true;
+                ParticleSystem bloodClone = Instantiate(blood, hit.point, Quaternion.LookRotation(hit.normal));
+                bloodClone.gameObject.AddComponent<CleanUp>();
                 stats.shotsHit++;
                 Health targetHP = hitObject.GetComponent<Health>();
                 targetHP.TakeDamage(damage);
@@ -106,7 +110,6 @@ public class Pistol : MonoBehaviour
 
         ammo.currentAmmo--;
         isShooting = false;
-        animator.SetTrigger("Shoot");
 
     }
 
