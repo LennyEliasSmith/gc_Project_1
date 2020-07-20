@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     public float maxHP;
     public float deathTime;
 
-    private bool isDead;
+    public bool isDead;
 
     public AudioSource deathSound;
     public AudioClip[] deathSounds;
@@ -51,8 +51,10 @@ public class Health : MonoBehaviour
             if(this.CompareTag("Enemy"))
             {
                 sprite.enabled = false;
+                StartCoroutine(Die());
+            } else if (this.CompareTag("Player")) {
+                managerScript.PlayerDeath();
             }
-            StartCoroutine(Die());
         } else
             HurtSound();
     }
@@ -64,9 +66,6 @@ public class Health : MonoBehaviour
 
         // Debug.Log("death");
         yield return new WaitForSeconds(deathTime);
-
-        if (this.gameObject.CompareTag("Player"))
-            managerScript.PlayerDeath();
 
         Destroy(this.gameObject);
     }

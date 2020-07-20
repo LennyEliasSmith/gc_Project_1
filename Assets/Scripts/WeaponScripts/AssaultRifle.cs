@@ -23,6 +23,7 @@ public class AssaultRifle : MonoBehaviour
 
     public ParticleSystem muzzle;
     public ParticleSystem blood;
+    public Light muzzleLight;
 
     public WeaponAmmo ammo;
     public WeaponStats stats;

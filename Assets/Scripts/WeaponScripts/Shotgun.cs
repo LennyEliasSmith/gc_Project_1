@@ -167,7 +167,7 @@ public class Shotgun : MonoBehaviour
 
         if (ammo.currentAmmo == ammo.maxAmmo)
         {
-            Debug.Log("Finished Reload");
+            // Debug.Log("Finished Reload");
             animator.SetTrigger("FinishReload");
             gunAudio.PlayOneShot(gunPump);
             isReloading = false;

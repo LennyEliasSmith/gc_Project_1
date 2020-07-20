@@ -18,14 +18,18 @@ public class EnemyPistol : MonoBehaviour
 
     public AudioSource gunSound;
 
-    private Transform player;
+    private GameObject player;
+    private Transform playerPos;
+    private Health playerHealth;
     private GameObject hitObject;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerHealth = player.GetComponent<Health>();
+        playerPos = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
@@ -33,7 +37,7 @@ public class EnemyPistol : MonoBehaviour
     {
         CheckLOS();
 
-        if(playerLOS)
+        if(playerLOS && !playerHealth.isDead)
         {
             rTimer = rTimer + Time.deltaTime;
 
