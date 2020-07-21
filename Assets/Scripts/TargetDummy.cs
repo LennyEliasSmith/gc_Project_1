@@ -9,7 +9,13 @@ public class TargetDummy : MonoBehaviour
     public BoxCollider[] colliders;
     public EnemyPistol weapon;
 
+    public GameObject drop;
+    public bool canDropAmmo;
+
     private Transform player;
+
+    private int[] dropChance = new int[] { 0, 1, 2, 3};
+    public int i;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +24,9 @@ public class TargetDummy : MonoBehaviour
         colliders = GetComponentsInChildren<BoxCollider>();
         weapon = GetComponent<EnemyPistol>();
         player = GameObject.FindGameObjectWithTag("playerTarget").transform;
+
+        canDropAmmo = true;
+        DropAmmoChance();
     }
 
     // Update is called once per frame
@@ -32,6 +41,24 @@ public class TargetDummy : MonoBehaviour
                 Destroy(colliders[i]);
                 Destroy(weapon);
             }
+        }
+    }
+
+    void DropAmmoChance()
+    {
+        if (canDropAmmo)
+        {
+            i = Random.Range(0, dropChance.Length);
+            i = Mathf.RoundToInt(i);
+        }
+
+    }
+
+    public void DropAmmo()
+    {
+        if (dropChance[i] == dropChance[3])
+        {
+            GameObject ammoPickUp = Instantiate(drop, transform.position, Quaternion.identity);
         }
     }
 

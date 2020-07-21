@@ -286,6 +286,7 @@ MonoBehaviour:
   hp: {fileID: 9111150572869997468}
   colliders: []
   weapon: {fileID: 0}
+  drop: {fileID: 897457286841738490, guid: fed917e56fd7d7f418f6dcc7755b4acc, type: 3}
 --- !u!114 &9111150572869997468
 MonoBehaviour:
   m_ObjectHideFlags: 0

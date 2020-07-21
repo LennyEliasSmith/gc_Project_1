@@ -74,7 +74,7 @@ public class PlayerHUD : MonoBehaviour
     {
         ammo = GetComponentInChildren<WeaponAmmo>();
         // ammoString = player.ammo.ToString() + " / " + player.maxAmmo.ToString();
-        ammoCount.text = ammo.currentAmmo.ToString() + " / " + ammo.maxAmmo.ToString();
+        ammoCount.text = ammo.currentMag.ToString() + " / " + ammo.currentReserveAmmo.ToString();
         // ammoCount.text = ammoString;
     }
 

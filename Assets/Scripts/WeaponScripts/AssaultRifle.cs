@@ -23,7 +23,7 @@ public class AssaultRifle : MonoBehaviour
 
     public ParticleSystem muzzle;
     public ParticleSystem blood;
-    public Light muzzleLight;
+    public ParticleSystem sparks;
 
     public WeaponAmmo ammo;
     public WeaponStats stats;
@@ -55,7 +55,7 @@ public class AssaultRifle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ammo.currentAmmo > 0 && !isReloading && !isShooting && Time.time >= nextTimeToFire)
+        if (ammo.currentMag > 0 && !isReloading && !isShooting && Time.time >= nextTimeToFire)
         {
             if (Input.GetButton("Fire1"))
             {
@@ -67,7 +67,7 @@ public class AssaultRifle : MonoBehaviour
             }
         }
 
-        if (ammo.currentAmmo == 0)
+        if (ammo.currentMag == 0)
         {
             animator.SetBool("isShooting", false);
 
@@ -75,7 +75,7 @@ public class AssaultRifle : MonoBehaviour
 
         Hitmarker();
 
-        if (Input.GetButtonDown("Reload") && !isReloading && ammo.currentAmmo != ammo.maxAmmo)
+        if (Input.GetButtonDown("Reload") && !isReloading && ammo.currentMag != ammo.maxMag && ammo.currentReserveAmmo > 0)
         {
             StartCoroutine(Reload());
         }
@@ -116,14 +116,13 @@ public class AssaultRifle : MonoBehaviour
                 stats.shotsHit++;
                 Health targetHP = hitObject.GetComponent<Health>();
                 targetHP.TakeDamage(damage);
-                // if (targetHP.currentHP <= 0)
-                    // stats.killCount++;
-
+            } else if (hitObject.CompareTag("E nvironment")) {
+                ParticleSystem sparkClone = Instantiate(sparks, hit.point, Quaternion.LookRotation(hit.normal));
+                sparkClone.gameObject.AddComponent<CleanUp>();
             }
-
         }
 
-        ammo.currentAmmo--;
+        ammo.currentMag--;
         isShooting = false;
         // animator.SetTrigger("Shoot");
 

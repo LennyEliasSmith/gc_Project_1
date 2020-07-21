@@ -5,31 +5,45 @@ using UnityEngine;
 public class WeaponAmmo : MonoBehaviour
 {
 
-    public float maxAmmo;
-    public float currentAmmo;
+    public float maxMag;
+    public float currentMag;
+    public float maxReserveAmmo;
+    public float currentReserveAmmo;
+
+    public float ReserveAmmoMultiplier;
 
     void Start()
     {
         // set ammo to maximum during startup
-        if (currentAmmo <= 0)
-        {
-            currentAmmo = maxAmmo;
-        }
+        maxReserveAmmo = ReserveAmmoMultiplier * maxMag;
+        currentMag = maxMag;
+        currentReserveAmmo = maxReserveAmmo;
+
     }
 
     void Update()
     {
 
         // eliminates any ammo overloads
-        if (currentAmmo >= maxAmmo)
+        if (currentMag >= maxMag)
         {
-            currentAmmo = maxAmmo;
+            currentMag = maxMag;
         }
     }
 
     // refill ammo
     public void Reload()
     {
-        currentAmmo = maxAmmo;
-    }
+        if (currentReserveAmmo > 0)
+        {
+            float ammoNeeded = maxMag - currentMag;
+            if (ammoNeeded > currentReserveAmmo)
+            {
+                ammoNeeded = currentReserveAmmo;
+            }
+            currentReserveAmmo = currentReserveAmmo - ammoNeeded;
+            currentMag = currentMag + ammoNeeded;
+        }
+
+}
 }

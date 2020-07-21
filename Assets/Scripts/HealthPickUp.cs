@@ -32,9 +32,4 @@ public class HealthPickUp : MonoBehaviour
             
         }
     }
-
-    void Heal()
-    {
-
-    }
 }

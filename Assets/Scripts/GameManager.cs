@@ -48,8 +48,7 @@ public class GameManager : MonoBehaviour
 
     void Restart()
     {
-        hud.kills = 0;
-        hud.accuracyTotal = 0;
+        killCount = 0;
         gameEndCheck = true;
 
         SceneManager.LoadScene(1);

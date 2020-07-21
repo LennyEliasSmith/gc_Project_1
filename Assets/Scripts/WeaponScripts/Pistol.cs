@@ -23,6 +23,7 @@ public class Pistol : MonoBehaviour
 
     public ParticleSystem muzzle;
     public ParticleSystem blood;
+    public ParticleSystem sparks;
 
     public WeaponAmmo ammo;
     public WeaponStats stats;
@@ -57,7 +58,7 @@ public class Pistol : MonoBehaviour
     void Update()
     {
 
-        if (ammo.currentAmmo > 0 && !isReloading && !isShooting && Time.time >= nextTimeToFire)
+        if (ammo.currentMag > 0 && !isReloading && !isShooting && Time.time >= nextTimeToFire)
         {
             if (Input.GetButtonDown("Fire1"))
             {
@@ -66,7 +67,7 @@ public class Pistol : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Reload") && !isReloading && ammo.currentAmmo != ammo.maxAmmo)
+        if (Input.GetButtonDown("Reload") && !isReloading && ammo.currentMag != ammo.maxMag && ammo.currentReserveAmmo > 0)
         {
             StartCoroutine(Reload());
         }
@@ -105,10 +106,13 @@ public class Pistol : MonoBehaviour
                 stats.shotsHit++;
                 Health targetHP = hitObject.GetComponent<Health>();
                 targetHP.TakeDamage(damage);
+            } else if (hitObject.CompareTag("E nvironment")) {
+                ParticleSystem sparkClone = Instantiate(sparks, hit.point, Quaternion.LookRotation(hit.normal));
+                sparkClone.gameObject.AddComponent<CleanUp>();
             }
         }
 
-        ammo.currentAmmo--;
+        ammo.currentMag--;
         isShooting = false;
 
     }

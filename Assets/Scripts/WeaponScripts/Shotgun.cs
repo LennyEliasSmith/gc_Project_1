@@ -27,6 +27,7 @@ public class Shotgun : MonoBehaviour
     public WeaponStats stats;
     public ParticleSystem muzzle;
     public ParticleSystem blood;
+    public ParticleSystem sparks;
 
     public Animator animator;
 
@@ -60,7 +61,7 @@ public class Shotgun : MonoBehaviour
     {
         // AnimationLogic();
 
-        if (ammo.currentAmmo > 0 && !isReloading && !isShooting && Time.time >= nextTimeToFire)
+        if (ammo.currentMag > 0 && !isReloading && !isShooting && Time.time >= nextTimeToFire)
         {
             if (Input.GetButtonDown("Fire1"))
             {
@@ -88,18 +89,18 @@ public class Shotgun : MonoBehaviour
             }
 
             stats.shotsFired++;
-            ammo.currentAmmo--;
+            ammo.currentMag--;
             isShooting = false;
         }
 
-        if (Input.GetButtonDown("Reload") && !isReloading && ammo.currentAmmo != ammo.maxAmmo)
+        if (Input.GetButtonDown("Reload") && !isReloading && ammo.currentMag != ammo.maxMag && ammo.currentReserveAmmo > 0)
         {
             isReloading = true;
             animator.SetTrigger("InsertFirstShell");
             Reload();
         }
 
-        if(isReloading && (Input.GetButtonDown("Fire1") && ammo.currentAmmo != ammo.maxAmmo))
+        if(isReloading && (Input.GetButtonDown("Fire1") && ammo.currentMag != ammo.maxMag))
         {
             isReloading = false;
             gunAudio.PlayOneShot(gunPump);
@@ -136,9 +137,9 @@ public class Shotgun : MonoBehaviour
                 stats.shotsHit++;
                 Health targetHP = hitObject.GetComponent<Health>();
                 targetHP.TakeDamage(damage);
-                // if (targetHP.currentHP <= 0)
-                    // stats.killCount++;
-                    
+            } else if (hitObject.CompareTag("E nvironment")) {
+                ParticleSystem sparkClone = Instantiate(sparks, hit.point, Quaternion.LookRotation(hit.normal));
+                sparkClone.gameObject.AddComponent<CleanUp>();
             }
         }
         else
@@ -157,7 +158,8 @@ public class Shotgun : MonoBehaviour
 
         // Debug.Log("Reloading...");
 
-        ammo.currentAmmo++;
+        ammo.currentMag++;
+        ammo.currentReserveAmmo--;
 
         gunAudio.PlayOneShot(gunShell);
 
@@ -165,17 +167,22 @@ public class Shotgun : MonoBehaviour
 
         // Debug.Log("Loaded shell");
 
-        if (ammo.currentAmmo == ammo.maxAmmo)
+        if (ammo.currentMag == ammo.maxMag)
         {
             // Debug.Log("Finished Reload");
             animator.SetTrigger("FinishReload");
             gunAudio.PlayOneShot(gunPump);
             isReloading = false;
         }
-        else if (isReloading)
+        else if (isReloading && ammo.currentReserveAmmo > 0)
         {
             animator.SetTrigger("InsertShell");
             Reload();
+        } else if (isReloading && ammo.currentReserveAmmo == 0)
+        {
+            animator.SetTrigger("FinishReload");
+            gunAudio.PlayOneShot(gunPump);
+            isReloading = false;
         }
     }
 

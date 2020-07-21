@@ -62,7 +62,11 @@ public class Health : MonoBehaviour
     IEnumerator Die()
     {
         if (this.gameObject.CompareTag("Enemy"))
+        {
             managerScript.killCount++;
+            TargetDummy target = this.gameObject.GetComponent<TargetDummy>();
+            target.DropAmmo();
+        }
 
         // Debug.Log("death");
         yield return new WaitForSeconds(deathTime);
