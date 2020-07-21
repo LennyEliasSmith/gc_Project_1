@@ -12,9 +12,13 @@ public class GameManager : MonoBehaviour
     public float killCount;
     public float gameTimer;
 
+    private int levelNumber;
+
+    public bool isArena;
     public bool gameActive;
     public bool gameEnd;
     public bool gameEndCheck;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +30,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         if (gameEnd == false && gameActive == true)
@@ -38,7 +43,7 @@ public class GameManager : MonoBehaviour
             DebugCursor();
         
 
-        if (enemies.Length == 0 && gameEndCheck && gameActive)
+        if (enemies.Length == 0 && gameEndCheck && gameActive && !isArena)
         {
             GameEnd();
             hud.CalculateAcc();
@@ -51,7 +56,7 @@ public class GameManager : MonoBehaviour
         killCount = 0;
         gameEndCheck = true;
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(levelNumber);
     }
 
     public void PlayerDeath()
@@ -86,10 +91,28 @@ public class GameManager : MonoBehaviour
     private void OnLevelWasLoaded(int level)
     {
         if (level == 0)
+
+            levelNumber = level;
+
+            isArena = false;
             gameActive = false;
 
         if (level == 1)
         {
+            levelNumber = level;
+
+            isArena = false;
+            player = GameObject.FindGameObjectWithTag("Player");
+            hud = player.GetComponentInChildren<PlayerHUD>();
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            gameTimer = 0;
+            gameActive = true;
+        }
+        if (level == 2)
+        {
+            levelNumber = level;
+
+            isArena = true;
             player = GameObject.FindGameObjectWithTag("Player");
             hud = player.GetComponentInChildren<PlayerHUD>();
             enemies = GameObject.FindGameObjectsWithTag("Enemy");

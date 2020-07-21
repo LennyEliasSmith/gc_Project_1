@@ -43,6 +43,7 @@ public class AmmoPickUp : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            // get the weapons of the player, even if they are inactive
 
             Pistol pistol = player.GetComponentInChildren(typeof(Pistol),true) as Pistol;
             AssaultRifle rifle = player.GetComponentInChildren(typeof(AssaultRifle),true) as AssaultRifle;

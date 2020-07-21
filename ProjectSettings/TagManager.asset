@@ -8,6 +8,7 @@ TagManager:
   - playerTarget
   - GameManager
   - E nvironment
+  - EnemySpawner
   layers:
   - Default
   - TransparentFX

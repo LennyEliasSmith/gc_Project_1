@@ -286,6 +286,11 @@ MonoBehaviour:
   hp: {fileID: 9111150572869997468}
   colliders: []
   weapon: {fileID: 0}
+  ammoDrop: {fileID: 897457286841738490, guid: fed917e56fd7d7f418f6dcc7755b4acc, type: 3}
+  healthDrop: {fileID: 8220991038736569114, guid: 7b37d9f19d5c52148bac1d0970e4efb7,
+    type: 3}
+  canDrop: 0
+  i: 0
 --- !u!114 &9111150572869997468
 MonoBehaviour:
   m_ObjectHideFlags: 0

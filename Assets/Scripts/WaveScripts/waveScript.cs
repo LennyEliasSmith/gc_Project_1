@@ -12,31 +12,32 @@ public class waveScript : MonoBehaviour
     public class Wave
     {
         public string name;
-
         public Transform enemy;
-
         public int count;
-
         public float rate;
     }
 
     public TextMeshProUGUI waveText;
 
-    public Transform[] spawnPoints;
+    public GameObject[] spawnPoints;
 
     public Wave[] waves;
     private int nextWave = 0;
 
-    public float timeBetweenWaves = 5f;
+    public float timeBetweenWaves;
     public float waveCountdown;
 
     private float searchCountDown = 1f;
 
+    private GameManager gManager;
+    private GameObject player;
     private SpawnState state = SpawnState.COUNTING;
 
 
     void Start()
     {
+        gManager = GetComponent<GameManager>();
+
         waveCountdown = timeBetweenWaves;
 
         if (spawnPoints.Length == 0)
@@ -48,14 +49,15 @@ public class waveScript : MonoBehaviour
 
     void Update()
     {
+        player = gManager.player;
+        spawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawner");
 
         Debug.Log(EnemyIsAlive());
         if (state == SpawnState.WAITING)
         {
             if (!EnemyIsAlive())
             {
-                WaveCompleted();
-                
+                WaveCompleted(); 
             }
             else
             {
@@ -71,7 +73,7 @@ public class waveScript : MonoBehaviour
             }
             
         }
-        else
+        else if (gManager.isArena)
         {
             waveCountdown -= Time.deltaTime;
         }
@@ -113,11 +115,11 @@ public class waveScript : MonoBehaviour
     {
         Debug.Log("Spawning");
         state = SpawnState.SPAWNING;
-        waves.name = waveText.ToString();
+        // waves.name = waveText.ToString();
 
         for(int i = 0; i < waves.count; i++)
         {
-            waves.name = waveText.ToString();
+            // waves.name = waveText.ToString();
             SpawnEnemy(waves.enemy);
             yield return new WaitForSeconds(1f / waves.rate);
             Debug.Log(waves.name);
@@ -130,10 +132,7 @@ public class waveScript : MonoBehaviour
 
     void SpawnEnemy(Transform enemy)
     {
-
-       
-
-        Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)].transform;
         Instantiate(enemy, _sp.position, _sp.rotation);
         Debug.Log("spawning enemy: " + enemy.name);
     }

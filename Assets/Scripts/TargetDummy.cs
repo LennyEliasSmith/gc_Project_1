@@ -9,12 +9,13 @@ public class TargetDummy : MonoBehaviour
     public BoxCollider[] colliders;
     public EnemyPistol weapon;
 
-    public GameObject drop;
-    public bool canDropAmmo;
+    public GameObject ammoDrop;
+    public GameObject healthDrop;
+    public bool canDrop;
 
     private Transform player;
 
-    private int[] dropChance = new int[] { 0, 1, 2, 3};
+    private int[] dropChance = new int[] { 0, 1, 2, 3, 4};
     public int i;
 
     // Start is called before the first frame update
@@ -25,8 +26,8 @@ public class TargetDummy : MonoBehaviour
         weapon = GetComponent<EnemyPistol>();
         player = GameObject.FindGameObjectWithTag("playerTarget").transform;
 
-        canDropAmmo = true;
-        DropAmmoChance();
+        canDrop = true;
+        DropChance();
     }
 
     // Update is called once per frame
@@ -44,9 +45,9 @@ public class TargetDummy : MonoBehaviour
         }
     }
 
-    void DropAmmoChance()
+    void DropChance()
     {
-        if (canDropAmmo)
+        if (canDrop)
         {
             i = Random.Range(0, dropChance.Length);
             i = Mathf.RoundToInt(i);
@@ -58,8 +59,13 @@ public class TargetDummy : MonoBehaviour
     {
         if (dropChance[i] == dropChance[3])
         {
-            GameObject ammoPickUp = Instantiate(drop, transform.position, Quaternion.identity);
+            GameObject ammoPickUp = Instantiate(ammoDrop, transform.position, Quaternion.identity);
         }
+        else if (dropChance[i] == dropChance[4])
+        {
+            GameObject healthPickUp = Instantiate(healthDrop, transform.position, Quaternion.identity);
+        }
+
     }
 
 }
