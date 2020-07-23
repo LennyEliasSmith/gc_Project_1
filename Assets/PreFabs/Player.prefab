@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fde271d42a4c1845822b616047f2a63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 7
   fireRate: 5
   nextTimeToFire: 0
   reloadTime: 1.5
@@ -487,7 +487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5a112a856a8d746a938154107170a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMag: 10
+  maxMag: 12
   currentMag: 0
   maxReserveAmmo: 0
   currentReserveAmmo: 0
@@ -771,11 +771,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40648194ca52fbc4c8b1c69b1573c1a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 4
+  damage: 5
   gunSpread: 0.03
   fireRate: 10
   nextTimeToFire: 0
-  reloadTime: 2
+  reloadTime: 1.5
   isReloading: 0
   isShooting: 0
   gunAudio: {fileID: 0}
@@ -801,7 +801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5a112a856a8d746a938154107170a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMag: 25
+  maxMag: 30
   currentMag: 0
   maxReserveAmmo: 0
   currentReserveAmmo: 0
@@ -2867,7 +2867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 7335536354622243300}
-  speed: 9
+  speed: 10
   gravity: -29.43
   jumpHeight: 3
   aerialSpeedModifierX: 0.03

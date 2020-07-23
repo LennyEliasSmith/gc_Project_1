@@ -107,6 +107,26 @@ MonoBehaviour:
   - name: Wave 10
     enemy: {fileID: 6980205064915495628, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2, type: 3}
     count: 11
-    rate: 2
+    rate: 4
+  - name: Wave 11
+    enemy: {fileID: 6980205064915495628, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2, type: 3}
+    count: 11
+    rate: 4
+  - name: Wave 12
+    enemy: {fileID: 6980205064915495628, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2, type: 3}
+    count: 12
+    rate: 5
+  - name: Wave 13
+    enemy: {fileID: 6980205064915495628, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2, type: 3}
+    count: 15
+    rate: 5
+  - name: Wave 14
+    enemy: {fileID: 6980205064915495628, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2, type: 3}
+    count: 18
+    rate: 5
+  - name: Wave 15
+    enemy: {fileID: 6980205064915495628, guid: 1b10c24cd82a3be42b0a3a6956a9bdf2, type: 3}
+    count: 20
+    rate: 6
   timeBetweenWaves: 5
   waveCountdown: 0

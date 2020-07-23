@@ -145,7 +145,7 @@ public class AssaultRifle : MonoBehaviour
     {
 
         // Debug.Log("Reloading...");
-        // animator.SetTrigger("Reload");
+        animator.SetTrigger("Reload");
         gunAudio.PlayOneShot(gunReload);
 
         isReloading = true;

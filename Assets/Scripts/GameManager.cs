@@ -18,12 +18,15 @@ public class GameManager : MonoBehaviour
     public bool gameActive;
     public bool gameEnd;
     public bool gameEndCheck;
+
+    private waveScript waveScript;
     
 
     // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+        waveScript = GetComponent<waveScript>();
         gameEndCheck = true;
     }
 
@@ -55,6 +58,7 @@ public class GameManager : MonoBehaviour
     {
         killCount = 0;
         gameEndCheck = true;
+        waveScript.nextWave = 0;
 
         SceneManager.LoadScene(levelNumber);
     }

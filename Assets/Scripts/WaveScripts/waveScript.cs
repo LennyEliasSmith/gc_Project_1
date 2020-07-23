@@ -22,7 +22,7 @@ public class waveScript : MonoBehaviour
     public GameObject[] spawnPoints;
 
     public Wave[] waves;
-    private int nextWave = 0;
+    public int nextWave = 0;
 
     public float timeBetweenWaves;
     public float waveCountdown;
