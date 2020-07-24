@@ -44,6 +44,9 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetButtonDown("Function2"))
             DebugCursor();
+
+        if (Input.GetButtonDown("Function3"))
+            LoadMenu();
         
 
         if (enemies.Length == 0 && gameEndCheck && gameActive && !isArena)
@@ -57,7 +60,7 @@ public class GameManager : MonoBehaviour
     void Restart()
     {
         killCount = 0;
-        gameEndCheck = true;
+        gameTimer = 0;
         waveScript.nextWave = 0;
 
         SceneManager.LoadScene(levelNumber);
@@ -78,6 +81,19 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void LoadMenu()
+    {
+        killCount = 0;
+        gameEnd = false;
+        gameTimer = 0;
+        waveScript.nextWave = 0;
+
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+
+        SceneManager.LoadScene(0);
+    }
+
     public void GameEnd()
     {
         gameEnd = true;
@@ -94,14 +110,14 @@ public class GameManager : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
-        if (level == 0)
+        if (level == 0 || level == 1)
 
             levelNumber = level;
 
             isArena = false;
             gameActive = false;
 
-        if (level == 1)
+        if (level == 2 || level == 3)
         {
             levelNumber = level;
 
@@ -109,10 +125,12 @@ public class GameManager : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
             hud = player.GetComponentInChildren<PlayerHUD>();
             enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            gameTimer = 0;
+            gameEnd = false;
             gameActive = true;
+            gameEndCheck = true;
         }
-        if (level == 2)
+
+        if (level == 4)
         {
             levelNumber = level;
 
@@ -120,8 +138,9 @@ public class GameManager : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
             hud = player.GetComponentInChildren<PlayerHUD>();
             enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            gameTimer = 0;
+            gameEnd = false;
             gameActive = true;
+            gameEndCheck = true;
         }
     }
 

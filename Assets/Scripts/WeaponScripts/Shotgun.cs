@@ -22,6 +22,7 @@ public class Shotgun : MonoBehaviour
     public AudioClip gunShoot;
     public AudioClip gunShell;
     public AudioClip gunPump;
+    public AudioClip gunEmpty;
 
     public WeaponAmmo ammo;
     public WeaponStats stats;
@@ -49,6 +50,7 @@ public class Shotgun : MonoBehaviour
         gunShoot = sources[0].clip;
         gunPump = sources[1].clip;
         gunShell = sources[2].clip;
+        gunEmpty = sources[3].clip;
 
         muzzle = GetComponentInChildren<ParticleSystem>();
 
@@ -74,8 +76,15 @@ public class Shotgun : MonoBehaviour
                 DebugAnimation();
             }
         }
+        else if (ammo.currentMag == 0 && !isReloading && !isShooting && Time.time >= nextTimeToFire)
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                gunAudio.PlayOneShot(gunEmpty);
+            }
+        }
 
-       
+
 
         if (isShooting)
         {

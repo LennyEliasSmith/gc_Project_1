@@ -9,13 +9,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void StartGame()
     {
-        Cursor.visible = false;
         SceneManager.LoadScene(1);
     }
 
-    public void StartGauntlet()
-    {
-        Cursor.visible = false;
-        SceneManager.LoadScene(2);
-    }
 }

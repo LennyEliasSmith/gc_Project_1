@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Startmenu.unity
     guid: 9e757192f5d12da45991b927526ac9c0
   - enabled: 1
+    path: Assets/Scenes/LevelSelect.unity
+    guid: d9903be2e672a0241b326d38a051282b
+  - enabled: 1
     path: Assets/Scenes/LevelPrototype.unity
     guid: aa82a555c0991d444abbd32061eaa3f9
+  - enabled: 1
+    path: Assets/Scenes/Level_Offices.unity
+    guid: aee56a7825720ff4586fbee8e57eafa7
   - enabled: 1
     path: Assets/Scenes/lennyScene.unity
     guid: 255f2d0f0d0ae3446ac3d878a4849d17

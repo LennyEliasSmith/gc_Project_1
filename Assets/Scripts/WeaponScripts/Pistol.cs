@@ -20,6 +20,7 @@ public class Pistol : MonoBehaviour
     public AudioSource gunAudio;
     public AudioClip gunShoot;
     public AudioClip gunReload;
+    public AudioClip gunEmpty;
 
     public ParticleSystem muzzle;
     public ParticleSystem blood;
@@ -47,6 +48,7 @@ public class Pistol : MonoBehaviour
         gunAudio = sources[0];
         gunShoot = sources[0].clip;
         gunReload = sources[1].clip;
+        gunEmpty = sources[2].clip;
 
         muzzle = GetComponentInChildren<ParticleSystem>();
 
@@ -64,6 +66,13 @@ public class Pistol : MonoBehaviour
             {
                 nextTimeToFire = Time.time + 1f / fireRate;
                 Shoot();
+            }
+        }
+        else if (ammo.currentMag == 0 && !isReloading && !isShooting && Time.time >= nextTimeToFire)
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                gunAudio.PlayOneShot(gunEmpty);
             }
         }
 

@@ -52,7 +52,8 @@ public class waveScript : MonoBehaviour
         player = gManager.player;
         spawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawner");
 
-        Debug.Log(EnemyIsAlive());
+        // Debug.Log(EnemyIsAlive());
+
         if (state == SpawnState.WAITING)
         {
             if (!EnemyIsAlive())
