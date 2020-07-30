@@ -31,14 +31,21 @@ public class waveScript : MonoBehaviour
 
     private GameManager gManager;
     private GameObject player;
+    private PlayerHUD hud;
     private SpawnState state = SpawnState.COUNTING;
+
+    private bool waveTextSet;
 
 
     void Start()
     {
         gManager = GetComponent<GameManager>();
-
+        player = gManager.player;
+        hud = player.GetComponentInChildren<PlayerHUD>();
+        
         waveCountdown = timeBetweenWaves;
+
+        waveTextSet = false;
 
         if (spawnPoints.Length == 0)
         {
@@ -49,7 +56,7 @@ public class waveScript : MonoBehaviour
 
     void Update()
     {
-        player = gManager.player;
+
         spawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawner");
 
         // Debug.Log(EnemyIsAlive());
@@ -66,7 +73,7 @@ public class waveScript : MonoBehaviour
             }
         }
 
-        if(waveCountdown <= 0)
+        if(waveCountdown <= 0 && gManager.isArena)
         {
             if(state != SpawnState.SPAWNING)
             {
@@ -78,11 +85,13 @@ public class waveScript : MonoBehaviour
         {
             waveCountdown -= Time.deltaTime;
         }
+
+        
     }
 
     void WaveCompleted()
     {
-        Debug.Log("Wave COmpleted");
+        Debug.Log("Wave Completed");
 
         state = SpawnState.COUNTING;
 
@@ -116,14 +125,15 @@ public class waveScript : MonoBehaviour
     {
         Debug.Log("Spawning");
         state = SpawnState.SPAWNING;
-        // waves.name = waveText.ToString();
+        
+        waveText.text = waves.name;
 
         for(int i = 0; i < waves.count; i++)
         {
             // waves.name = waveText.ToString();
             SpawnEnemy(waves.enemy);
             yield return new WaitForSeconds(1f / waves.rate);
-            Debug.Log(waves.name);
+            // Debug.Log(waves.name);
         }
 
         state = SpawnState.WAITING;

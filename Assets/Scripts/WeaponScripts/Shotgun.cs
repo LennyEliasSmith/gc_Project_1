@@ -26,7 +26,9 @@ public class Shotgun : MonoBehaviour
 
     public WeaponAmmo ammo;
     public WeaponStats stats;
+
     public ParticleSystem muzzle;
+    public ParticleSystem tracers;
     public ParticleSystem blood;
     public ParticleSystem sparks;
 
@@ -128,6 +130,13 @@ public class Shotgun : MonoBehaviour
         spread += playerCam.transform.up * Random.Range(-1f, 1f);
         spread += playerCam.transform.right * Random.Range(-1f, 1f);
         direction += spread.normalized * Random.Range(0f, 0.1f);
+
+        ParticleSystem tracerClone = Instantiate(tracers, this.gameObject.transform);
+        tracerClone.transform.position = tracers.transform.position;
+        tracerClone.transform.forward = direction;
+        tracerClone.gameObject.AddComponent<CleanUp>();
+
+        tracerClone.Play();
 
         RaycastHit hit;
 

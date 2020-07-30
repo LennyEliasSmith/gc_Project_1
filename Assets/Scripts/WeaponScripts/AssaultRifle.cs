@@ -23,6 +23,7 @@ public class AssaultRifle : MonoBehaviour
     public AudioClip gunEmpty;
 
     public ParticleSystem muzzle;
+    public ParticleSystem tracers;
     public ParticleSystem blood;
     public ParticleSystem sparks;
 
@@ -107,6 +108,13 @@ public class AssaultRifle : MonoBehaviour
         spread += playerCam.transform.up * Random.Range(-gunSpread, gunSpread);
         spread += playerCam.transform.right * Random.Range(-gunSpread, gunSpread);
         direction += spread.normalized * Random.Range(0f, gunSpread);
+
+        ParticleSystem tracerClone = Instantiate(tracers, this.gameObject.transform);
+        tracerClone.transform.position = tracers.transform.position;
+        tracerClone.transform.forward = direction;
+        tracerClone.gameObject.AddComponent<CleanUp>();
+
+        tracerClone.Play();
 
         RaycastHit hit;
 

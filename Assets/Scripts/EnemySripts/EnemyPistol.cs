@@ -16,6 +16,8 @@ public class EnemyPistol : MonoBehaviour
 
     public Animator animator;
 
+    public ParticleSystem tracers;
+
     public AudioSource gunSound;
 
     private GameObject player;
@@ -84,6 +86,13 @@ public class EnemyPistol : MonoBehaviour
         spread += transform.up * Random.Range(-gunSpread, gunSpread);
         spread += transform.right * Random.Range(-gunSpread, gunSpread);
         direction += spread.normalized * Random.Range(0f, gunSpread);
+
+        ParticleSystem tracerClone = Instantiate(tracers, this.gameObject.transform);
+        tracerClone.transform.position = tracers.transform.position;
+        tracerClone.transform.forward = direction;
+        tracerClone.gameObject.AddComponent<CleanUp>();
+
+        tracerClone.Play();
 
         if (Physics.Raycast(transform.position, direction, out hit))
         {

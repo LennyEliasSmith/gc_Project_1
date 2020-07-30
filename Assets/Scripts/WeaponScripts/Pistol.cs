@@ -23,6 +23,7 @@ public class Pistol : MonoBehaviour
     public AudioClip gunEmpty;
 
     public ParticleSystem muzzle;
+    public ParticleSystem tracers;
     public ParticleSystem blood;
     public ParticleSystem sparks;
 
@@ -99,6 +100,13 @@ public class Pistol : MonoBehaviour
 
         Vector3 direction = playerCam.transform.forward;
         RaycastHit hit;
+
+        ParticleSystem tracerClone = Instantiate(tracers, this.gameObject.transform);
+        tracerClone.transform.position = tracers.transform.position;
+        tracerClone.transform.forward = direction;
+        tracerClone.gameObject.AddComponent<CleanUp>();
+
+        tracerClone.Play();
 
         if (Physics.Raycast(playerCam.transform.position, direction, out hit))
         {

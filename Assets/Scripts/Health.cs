@@ -41,6 +41,12 @@ public class Health : MonoBehaviour
         
         currentHP = currentHP - dmg;
 
+        if(this.CompareTag("Player"))
+        {
+            PlayerHUD hud = GetComponentInChildren<PlayerHUD>();
+            hud.dmgOverlay.enabled = true;
+        }
+
         if (isDead)
             return;
 
